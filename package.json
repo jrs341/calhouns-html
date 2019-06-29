@@ -1,0 +1,23 @@
+{
+  "name": "calhouns-html",
+  "version": "1.0.0",
+  "description": "HTML version of Calhouns",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrs341/calhouns-html.git"
+  },
+  "author": "Jason Sinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrs341/calhouns-html/issues"
+  },
+  "homepage": "https://github.com/jrs341/calhouns-html#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
