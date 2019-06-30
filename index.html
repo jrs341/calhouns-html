@@ -60,7 +60,7 @@
     </div>
     	<button onclick="riverData()"> River Data
     		<script type="text/javascript">
-    			const riverData() {
+    			function riverData() {
     				fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
     				.then(function(response) {
     					if (response.status !== 200) {
