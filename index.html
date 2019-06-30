@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-
+	<!--//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all-->
  	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -57,6 +57,15 @@
 	<header>
 		
 	</header>
+    </div>
+    	<button onclick="riverData()"> River Data
+    		<script type="text/javascript">
+    			riverData = async () => {
+    				let response = await fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
+    				console.log('response', response)
+    			}
+    		</script>
+    	</button>
 		<form>
 			<fieldset name="personal">
 				<input 
