@@ -63,6 +63,7 @@
     			const riverData = async () => {
     				let response = await fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
     				console.log('response', response.status)
+    				console.log('response', response.json)
     			}
     		</script>
     	</button>
