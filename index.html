@@ -69,7 +69,9 @@
     					}
 
     					response.json().then(function(data) {
-    						console.log('river data', data)
+    						console.log('river data', data.value)
+    						console.log('river data', data.value.timeSeries[0])
+    						console.log('river data', data.value.timeSeries[0].values)
     					})
     				})
     				.catch(function(error) {
