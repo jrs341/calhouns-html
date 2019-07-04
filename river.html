@@ -59,7 +59,7 @@
     		<script type="text/javascript">
     			function riverData() {
     				// fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
-    				fetch('https://graphql-server-basic.herokuapp.com/')
+    				fetch('https://graphql-server-basic.herokuapp.com/?query={getTivoliRiverInfo{data{date, level}}}')
     				.then(function(response) {
     					if (response.status !== 200) {
     						console.log('There was a problem')
