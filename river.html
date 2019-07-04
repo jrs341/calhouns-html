@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<!--//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all-->
+ 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<script type="application/ld+json">
+	{
+	  "@context": "http://schema.org",
+	  "@type": [
+	  "RVPark",
+	  "Campground",
+	  "LodgingBusiness"
+	  ],
+	  "name": "Calhoun's Riverside RV Retreat",
+	  "openingHours": [
+	    "Mo-Fr 09:00-18:00",
+	    "Sa-Su 09:00-16:00"
+	    ],
+	  "telephone": "(361) 550-7536",
+	  "url": "https://www.calhounsriversidervretreat.com",
+	  "image": "https://www.calhounsriversidervretreat.com/css/images/circleC.png",
+	  "priceRange": "$$",
+	  "hasMap": 		"https://www.google.com/maps/place/125+Haeber+Ln,+Tivoli,+TX+77990/@28.4767777,-96.8629815,17z/data=!3m1!4b1!4m5!3m4!1s0x8669d8eb4b1185b9:0xc2267a66b6d7b93c!8m2!3d28.4767777!4d-96.8607928",
+	  "checkinTime": "14:00",
+	  "checkoutTime": "12:00",
+	  "address": {
+	    "@type": "PostalAddress",
+	    "addressLocality": "Tivoli",
+	    "addressRegion": "TX",
+	    "postalCode": "77990",
+	    "streetAddress": "125 Haeber Ln"
+	  },
+	  "aggregateRating": {
+	    "@type": "AggregateRating",
+	    "ratingValue": "4.5",
+	    "reviewCount": "27"
+	  },
+	   "geo": {
+	    "@type": [
+	    "GeoCoordinates",
+	    "GeoCircle"
+	    ],
+	    "latitude": "28.477294",
+	    "longitude": "-96.861032",
+	    "geoRadius": "45000"
+	  }
+	 }
+	</script>
+	<meta name="description" content="RV Park">
+	<meta name="author" content="Jason Sinn">
+	<link rel="shortcut icon" href="./css/images/favicon.ico">
+  	<title>Calhoun's RV Retreat</title> 
+
+</head>
+<body>
+	<button onclick="riverData()"> River Data
+    		<script type="text/javascript">
+    			function riverData() {
+    				// fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
+    				fetch('https://graphql-server-basic.herokuapp.com/')
+    				.then(function(response) {
+    					if (response.status !== 200) {
+    						console.log('There was a problem')
+    						return
+    					}
+
+    					response.json().then(function(data) {
+    						console.log('river data', data.value)
+    						console.log('river data', data.value.timeSeries[0])
+    						console.log('river data', data.value.timeSeries[0].values)
+    					})
+    				})
+    				.catch(function(error) {
+    					console.log('Fetch Error', error)
+    				})
+    			}
+    		</script>
+    	</button>
+	<header>
+		
+	</header>
+	<h1> River info page </h1>
+</body>
+</html>
