@@ -1,7 +1,0 @@
-<svg width='16px' height='16px' xmlns='http://www.w3.org/2000/svg'
-	style='backgroundColor: transparent' >
-  <text key='logoC' x='0' y='16'
-  	style='fill: blue; font-size: 21'> C </text>
-  <text key='logoRV' x='3.5' y='11'
-  	style='fill: red; font-size: 6.8'> RV </text>
-</svg>
