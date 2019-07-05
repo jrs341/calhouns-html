@@ -51,36 +51,26 @@
 	<meta name="description" content="RV Park">
 	<meta name="author" content="Jason Sinn">
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
+	<link rel="stylesheet" href="css/Spinner.css">
   	<title>Calhoun's RV Retreat</title> 
 
 </head>
 <body>
-	<button onclick="riverData()"> River Data
-    		<script type="text/javascript">
-    			function riverData() {
-    				// fetch('//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all')
-    				fetch('https://graphql-server-basic.herokuapp.com/?query={getTivoliRiverInfo{data{date, level}}}')
-    				.then(function(response) {
-    					if (response.status !== 200) {
-    						console.log('There was a problem')
-    						return
-    					}
-
-    					response.json().then(function(data) {
-    						console.log('river data', data.value)
-    						console.log('river data', data.value.timeSeries[0])
-    						console.log('river data', data.value.timeSeries[0].values)
-    					})
-    				})
-    				.catch(function(error) {
-    					console.log('Fetch Error', error)
-    				})
-    			}
-    		</script>
-    	</button>
-	<header>
-		
-	</header>
 	<h1> River info page </h1>
+	<div id="riverLevel">
+		
+	</div>
+	
+	<!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Load our React component. -->
+  <script type="module" src="components/TivoliRiverLevel/TivoliRiverLevel.js"></script>
+  <script type="module" src="components/TivoliRiverLevel/spinner.js"></script>
+  <script type="module" src="components/LineChart/lineChart.js"></script>
+  <script type="module" src="components/LineChart/majorAxis.js"></script>
+  <script type="module" src="components/LineChart/minorAxis.js"></script>
 </body>
 </html>
