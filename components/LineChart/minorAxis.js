@@ -3,23 +3,10 @@
 const e = React.createElement;
 
 class MinorAxis extends React.Component {
-	static propTypes = {
-
-	}
-
-	static defaultProps = {
-    svgHeight: 40,
-    svgWidth: 80,
-    textStyle: {fill: 'black', fontSize:'1.5'}
-	}
-
 	constructor (props) {
 		super (props)
-
 		this.state = {
-
 		}
-
 		this.makeMinorXAxis = this.makeMinorXAxis.bind(this)
 		this.makeMinorYAxis = this.makeMinorYAxis.bind(this)
 	}
@@ -33,7 +20,7 @@ class MinorAxis extends React.Component {
 
   for (var i = 0; i < 10; i++) {
     if (i === 1 || i === 2) {
-      i === 1 ? minorXAxis.push([React.createElement("line", {
+      i === 1 ? minorXAxis.push([e("line", {
         key: 'minorX' + i,
         x1: "3",
         y1: "3.12",
@@ -43,7 +30,7 @@ class MinorAxis extends React.Component {
           stroke: 'red',
           strokeWidth: '.2'
         }
-      }), React.createElement("text", {
+      }), e("text", {
         key: 'minorXText' + i,
         x: "0",
         y: "3.6",
@@ -51,7 +38,7 @@ class MinorAxis extends React.Component {
           fill: 'red',
           fontSize: '1.5'
         }
-      }, " 8.96 ")]) : minorXAxis.push([React.createElement("line", {
+      }, " 8.96 ")]) : minorXAxis.push([e("line", {
         key: 'minorX' + i,
         x1: "3",
         y1: i * 3,
@@ -61,14 +48,14 @@ class MinorAxis extends React.Component {
           stroke: 'orange',
           strokeWidth: '.1'
         }
-      }), React.createElement("text", {
+      }), e("text", {
         key: 'minorXText' + i,
         x: "1",
         y: i * 3 + .4,
         style: textStyle
       }, " ", i * 3 + 2, " ")]);
     } else {
-      minorXAxis.push([React.createElement("line", {
+      minorXAxis.push([e("line", {
         key: 'minorX' + i,
         x1: "3",
         y1: i * 3,
@@ -78,7 +65,7 @@ class MinorAxis extends React.Component {
           stroke: 'black',
           strokeWidth: '.1'
         }
-      }), React.createElement("text", {
+      }), e("text", {
         key: 'minorXText' + i,
         x: "1",
         y: i * 3 + .4,
@@ -197,5 +184,11 @@ class MinorAxis extends React.Component {
     );
   }
 }
+
+MinorAxis.defaultProps = {
+    svgHeight: 40,
+    svgWidth: 80,
+    textStyle: {fill: 'black', fontSize:'1.5'}
+  }
 
 export { MinorAxis }

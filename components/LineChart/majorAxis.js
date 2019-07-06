@@ -3,27 +3,14 @@
 const e = React.createElement;
 
 class MajorAxis extends React.Component {
-	static propTypes = {
-
-	}
-
-	static defaultProps = {
-		svgHeight: 40,
-		svgWidth: 80
-	}
-
 	constructor (props) {
 		super (props)
-
-		this.state = {
-
-		}
 	}
 
 	render() {
 		const { svgHeight, svgWidth} = this.props
 		return [
-			React.createElement(
+			e(
 				"text",
 				{
     				key: "yLabel",
@@ -36,7 +23,7 @@ class MajorAxis extends React.Component {
     				}
 				},
 				" Level (ft) "),
-			React.createElement("line", {
+			e("line", {
     key: "majorX",
     x1: "3",
     y1: svgHeight - 10,
@@ -46,7 +33,7 @@ class MajorAxis extends React.Component {
       stroke: 'black',
       strokeWidth: '.3'
     }
-  }), React.createElement("line", {
+  }), e("line", {
     key: "majorY",
     x1: "5",
     y1: svgHeight - 8,
@@ -59,5 +46,10 @@ class MajorAxis extends React.Component {
   })];
 	}
 }
+
+MajorAxis.defaultProps = {
+    svgHeight: 40,
+    svgWidth: 80
+  }
 
 export { MajorAxis };

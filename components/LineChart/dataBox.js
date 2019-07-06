@@ -6,9 +6,9 @@ import { Spinner } from '../TivoliRiverLevel/spinner.js'
 import { TrendInfo } from './trendInfo.js'
 
 class DataBox extends React.Component {
-	static propTypes = {
-
-	}
+  constructor (props) {
+    super (props)
+  }
 
 	render () {
 		const { lastReading, sixHourDelta, twelveHourDelta, twentyFourHourDelta, fortyEightHourDelta } = this.props

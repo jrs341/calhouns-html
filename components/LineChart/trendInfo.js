@@ -5,17 +5,6 @@ const e = React.createElement;
 import { Spinner } from "../TivoliRiverLevel/spinner.js";
 
 class TrendInfo extends React.Component {
-	static propTypes = {
-    
-	}
-
-  static defaultProps = {
-    textStyle: {
-        fill: 'black',
-        fontSize:'1.5'
-      }
-  }
-
   constructor (props) {
     super (props)
 
@@ -180,6 +169,13 @@ class TrendInfo extends React.Component {
       return e(Spinner, null);
     }
   }
+}
+
+TrendInfo.defaultProps = {
+  textStyle: {
+      fill: 'black',
+      fontSize:'1.5'
+    }
 }
 
 export { TrendInfo }
