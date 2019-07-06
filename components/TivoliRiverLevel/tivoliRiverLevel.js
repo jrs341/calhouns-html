@@ -15,7 +15,7 @@ class TivoliRiverLevel extends React.Component{
   }
 
 	getData = () => {
-		fetch('https://graphql-server-basic.herokuapp.com/?query={getTivoliRiverInfo{data{date, level}}}')
+		fetch('https://graphql-server-basic.herokuapp.com/?query={getTivoliRiverInfo{data{date, level}, trendInfo{lastReading{date, level} sixHourDelta, twelveHourDelta, twentyFourHourDelta, fortyEightHourDelta}}}')
 			.then((response) => {
 				if (response.status !== 200) {
 					console.log('There was a problem')
@@ -26,6 +26,7 @@ class TivoliRiverLevel extends React.Component{
 
 				response.json().then((data) => {
 					this.setState({data:data})
+					console.log(data)
 					return	
 				})
 			})
