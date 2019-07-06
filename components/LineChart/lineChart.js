@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-const e = React.createElement;
+const e = React.createElement
 
-//import DataBox from './DataBox.js'
-import { MajorAxis } from './majorAxis.js';
+import { DataBox } from './dataBox.js'
+import { MajorAxis } from './majorAxis.js'
 import { MinorAxis } from './minorAxis.js'
 
 class LineChart extends React.Component{
@@ -40,25 +40,17 @@ class LineChart extends React.Component{
   				})
 			),
 			e(MajorAxis, null),
-			e(MinorAxis, null)
+			e(MinorAxis, null),
+			e(DataBox,
+				{	lastReading : trendInfo.lastReading,
+					sixHourDelta : trendInfo.sixHourDelta,
+					twelveHourDelta : trendInfo.twelveHourDelta,
+					twentyFourHourDelta : trendInfo.twentyFourHourDelta,
+					fortyEightHourDelta : trendInfo.fortyEightHourDelta
+				}
+			)
 		)]
 	}
 }
 
-export { LineChart };
-
-/*<svg viewBox={`-1 -1 ${svgWidth} ${svgHeight}`}>
-				<g key='main group'>
-				{data.map((point, i) => {
-          return <circle key={i} style={{stroke:'#2196F3', fill:'#2196F3'}} cx={i/9.6 + 5.5} cy={(10 - point.level) * 3} r='.05'/> 
-        })}
-				<MajorAxis />
-				<MinorAxis />
-				<DataBox
-	lastReading = {trendInfo.lastReading}
-	sixHourDelta = {trendInfo.sixHourDelta}
-	twelveHourDelta = {trendInfo.twelveHourDelta}
-	twentyFourHourDelta = {trendInfo.twentyFourHourDelta}
-	fortyEightHourDelta = {trendInfo.fortyEightHourDelta}/>
-				</g>
-      </svg>*/
+export { LineChart }

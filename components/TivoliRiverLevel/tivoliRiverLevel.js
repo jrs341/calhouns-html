@@ -26,7 +26,6 @@ class TivoliRiverLevel extends React.Component{
 
 				response.json().then((data) => {
 					this.setState({data:data})
-					console.log(data)
 					return	
 				})
 			})
