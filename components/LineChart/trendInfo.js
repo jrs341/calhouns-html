@@ -129,23 +129,33 @@ class TrendInfo extends React.Component {
           null;
       }
 
-      arrows.push([React.createElement("text", {
-        key: key + 'text',
-        x: x,
-        y: y,
-        style: textStyle
-      }, " ", text, " "), React.createElement("line", {
-        key: key + 'line',
-        x1: x1,
-        y1: y1,
-        x2: x2,
-        y2: y2,
-        style: this.arrowStyle(props[key])
-      }), React.createElement("polyline", {
-        key: key + 'poly',
-        points: points,
-        style: this.arrowStyle(props[key])
-      })]);
+      arrows.push([
+        e(
+          "text",
+          {
+            key: key + 'text',
+            x: x,
+            y: y,
+            style: textStyle
+          }, " ", text, " "),
+        e(
+          "line",
+          {
+            key: key + 'line',
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+            style: this.arrowStyle(props[key])
+          }),
+        e(
+          "polyline",
+          {
+            key: key + 'poly',
+            points: points,
+            style: this.arrowStyle(props[key])
+          })
+      ]);
     }
 
     return arrows;
@@ -160,11 +170,14 @@ class TrendInfo extends React.Component {
     } = this.props;
 
     if (sixHourDelta != undefined) {
-      return React.createElement("g", {
-        key: "arrow group"
-      }, this.renderPolyLine(this.props));
+      return e(
+        "g", 
+          {
+            key: "arrow group"
+          }, 
+            this.renderPolyLine(this.props));
     } else {
-      return React.createElement(Spinner, null);
+      return e(Spinner, null);
     }
   }
 }
