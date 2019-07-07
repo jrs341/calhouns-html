@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<!--//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all-->
  	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -51,125 +50,68 @@
 	<meta name="description" content="RV Park">
 	<meta name="author" content="Jason Sinn">
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   	<title>Calhoun's RV Retreat</title> 
   	
 </head>
-<body>
-	<header>
-		
-	</header>
-    </div>
-    	<a href="/river.html"> River Page </a>
-		<form>
-			<fieldset name="personal">
-				<input 
-					id="first_name"
-					type="text"
-					name="first_name"
-					placeholder="First Name"
-					required
-					pattern="^[a-zA-Z]+$"
-					onblur="capitalize()">
-					<script type="text/javascript">
-						function capitalize() {
-							let first = document.getElementById('first_name')
-							let string = first.value.replace(/[^a-zA-Z]/g, '')
-							first.value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-						}
-					</script>
-				<br>
-				<input 
-					id = "last_name"
-					type="text"
-					name="last_name"
-					placeholder="Last Name"
-					required
-					pattern="^[a-zA-Z]+$"
-					onblur="capitalizeLast()">
-					<script type="text/javascript">
-						function capitalizeLast() {
-							let last = document.getElementById('last_name')
-							let string = last.value.replace(/[^a-zA-Z]/g, '')
-							last.value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-						}
-					</script>
-				<br>
-				<input
-					type="email"
-					name="email"
-					placeholder="Email Address"
-					required>
-				<br>
-				<input 
-					id="drivers_state"
-					type="text"
-					name="drivers_state"
-					placeholder="Issuing State"
-					required
-					pattern="^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$"
-					onblur="driverState()">
-					<script type="text/javascript">
-						let drivers_state = document.getElementById('drivers_state')
-						drivers_state.oninvalid = function(event){
-  							event.target.setCustomValidity('Enter a valid state abbreviation')}
-						function driverState() {
-							let string = drivers_state.value.replace(/[^a-zA-Z]/g, '')
-							drivers_state.value = string.charAt(0).toUpperCase() + string.charAt(1).toUpperCase()
-						}
-					</script>
-				<br>
-				<input
-					id="drivers_number"
-					type="text"
-					name="drivers_number"
-					placeholder="Drivers License Number"
-					required
-					pattern="^[0-9]*$"
-					onblur="onlyNumbers()">
-					<script type="text/javascript">
-						let drivers_number = document.getElementById('drivers_number')
-  						drivers_number.oninvalid = function(event){
-  							event.target.setCustomValidity('Only enter numbers')
-  						}
-  						function onlyNumbers(){
-							let string = drivers_number.value.replace(/[^0-9]/g, '')
-							drivers_number.value = string
-  						}
-					</script>
-				<br>
-				<input 
-					id="tel"
-					type="tel"
-					name="phone_number"
-					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" placeholder="(123) 456-7890"
-					required
-					onblur="telFormat()">
-					<script type="text/javascript">
-						let tel = document.getElementById('tel')
-  						tel.oninvalid = function(event){
-  							event.target.setCustomValidity('Phone number should be 10 digits. e.g. (123) 456-7890')
-  						}
-  						function telFormat(){
-  						var numbers = tel.value.replace(/\D/g, ''),
-        				char = { 0: '(', 3: ') ', 6: '-' };
-            			tel.value = '';
-            			for (var i = 0; i < numbers.length; i++) {
-                		tel.value += (char[i] || '') + numbers[i];
-            			}
-            		}
-  					</script>
-  				<br>
-				<input 
-					type="text"
-					name="postal_code"
-					pattern="^((\d{5}-\d{4})|(\d{5})|([A-Z]\d[A-Z]\s\d[A-Z]\d))$"
-					placeholder="12345-1234"
-					required
-					>
-			</fieldset>
-			<input type="submit">
-			<input type="reset">
-		</form>
+	<body class="w3-container">
+      <header class="w3-top"
+        style="background-color: #edeae8">
+        <div class="w3-bar"
+          style="border-bottom: 1px solid #60b0f4">
+          <a href="mailto:calhoun@calhounsrvretreats.com?" target="_top" class="w3-bar-item"
+            style="color:#60b0f4; text-decoration-line: none">
+              <span 
+                style="color:red">&#9993 </span>calhoun@calhounsrvretreats.com</a>
+          <a href="tel:361-550-7536" 
+            class="w3-bar-item w3-right"
+            style="color:#60b0f4; text-decoration-line: none; padding-right: 36px">
+              <span style="color:red">&#9990 </span>361 550 7536</a>
+        </div>
+        <div class="w3-container">
+	        <div class="w3-bar w3-blue">
+	        	<a href="" class="w3-mobile w3-bar-item w3-border w3-center" style="width: 19%; margin: 'auto'"> Rates </a>
+	        	<a href="" class="w3-mobile w3-bar-item w3-border w3-center" style="width: 19%"> Reservations </a>
+	        	<a href="" class="w3-mobile w3-bar-item w3-border w3-center" style="width: 19%"> River Level </a>
+	        	<a href="" class="w3-mobile w3-bar-item w3-border w3-center" style="width: 24%"> Additional Info </a>
+	        	<a href="" class="w3-mobile w3-bar-item w3-border w3-center" style="width: 19%"> Contact </a>
+	        </div>
+	    </div>
+        <div class="w3-container w3-center">
+          <p id="pageTitle">
+            <img src="./css/images/circleC.png"
+              style="width:8vw; height: 7vw; margin-right: -.5vw">alhoun's Riverside RV Retreat
+          </p>
+        </div>
+      </header>
+    	<div class="w3-container"
+        style="position: absolute;top: 11vw">
+      <img src="./css/images/coverImage.jpg" class="w3-border w3-padding" 
+        style="width:100%; height: 50vw; margin-top: 50px">
+    	<h1>
+            Your Front Row Seat to a Texas Gem, 
+            <br>
+            </br>
+            The Guadalupe River
+            </h1>
+            <p id="bodyPara">
+            Calhoun’s Riverside RV Retreat offers visitors the best of the Guadulupe River. Just outside Tivoli, Texas, and a short drive from Victoria, Port O'Connor and Point Comfort, Calhoun’s is centrally located and filled 
+            with wildlife. Once you see it you’ll know: Calhoun’s is unlike any other Texas RV park. Here, visitors can take advantage of some of the best fishing, bow fishing, boating, and canoing and kayaking in Texas, or simply enjoy the river from their RV! Just 17 miles from Port Lavaca, 30 miles from Rockport and Victoria, Calhoun’s offers a peaceful RV camping experience nestled beneath giant oak trees.
+            </p>
+            <p id="bodyPara">
+            Forget trying to get a spot on the bay, Calhoun’s is just 5 short miles by boat from the San Antonio Bay. The river is plenty deep enough to accommodate larger boats, and with Calhoun’s private boat ramp, getting there is easy. Located in the center of the Crescent Coast, visitors can boat their way to the Gulf of Mexico, while enjoying an abundancy of wildlife.
+            </p>
+            <p id="bodyPara">
+            Calhoun’s offers more than a little something for everyone. Whether you enjoy deer, water fowel or feral hog hunting, this is a sportsmen’s paradise. If you’re a Winter Texan looking for an alternative to the crowds, Calhoun’s is a unique Texas RV Park centrally located to the region’s historic and resort towns. Tired of RV parks without a tree in sight? Wanting a little room to get comfortable? Seeking a little adventure on the river? Calhoun’s is a different kind of place. Paddle down the river one day, take a drive to Corpus Christi the next and enjoy all the variety in this quiet corner of the Crescent Coast.
+            </p>
+            <p id="bodyPara">
+            Owned and operated by a U.S. Army veteran, Calhoun’s is all about providing sportsmen, Winter Texans and families with a great place to experience the best of Texas!
+            </p>
+            <p id="bodyPara">
+            Need lodging? We have cabins!
+            </p>
+           </div>
 	<footer>
 		
 	</footer>
