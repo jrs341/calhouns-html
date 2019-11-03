@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<!--//waterservices.usgs.gov/nwis/iv/?format=json&sites=08188800&period=P3DT12H&parameterCd=00065&siteStatus=all-->
  	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -51,17 +50,22 @@
 	<meta name="description" content="RV Park">
 	<meta name="author" content="Jason Sinn">
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
+	<link rel="stylesheet" href="css/alert.css">
   	<title>Calhoun's RV Retreat</title> 
   	
 </head>
+<script type="text/javascript">
+	
+</script>
 <body>
 	<header>
 		
 	</header>
+	<div class="alert"></div>
     </div>
-		<form action="" class="form">
+		<form action="" id="form" class="form">
 			<script>
-			document.querySelector('form.form').addEventListener('submit', function(e) {
+			/*document.querySelector('form.form').addEventListener('submit', function(e) {
   			e.preventDefault()
   				const formData = new FormData(this)
   				const entires = formData.entries()
@@ -69,26 +73,61 @@
   				for (var input of entires) {
     			console.log(input[0] + ': ' + input[1])
   				}
-			})
+			})*/
 			</script>
 			<fieldset name="personal">
 				<input
 					type="email"
 					name="email"
+					id="email"
 					placeholder="Email Address"
+					
+					oninvalid
 					required>
+					<script type="text/javascript">
+						//onblur="validateEmail()"
+						const validateEmail = () => {
+							let email = document.getElementById('email')
+							email.addEventListener('invalid', function(event){
+								console.log('added event listener')
+							})
+							email.checkValidity()
+							if (form.personal.elements[0].reportValidity()) {
+								return
+							} else {
+							console.log('enter a valid email')
+							let email = document.getElementById('email')
+							email.checkValidity()
+							console.log('validity', email.checkValidity())
+							email.oninvalid = function(event){
+								console.log('event', event)
+
+							}
+							/*email.addEventListener('invalid', function(){
+								console.log('event listender')
+								email.oninvalid = function(event){
+									console.log('oninvalid')
+  							email.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
+  						}
+
+							})*/
+  							
+							}
+						}	
+					</script>
 				<br>
 				<input 
 					id="tel"
 					type="tel"
 					name="phone_number"
 					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" placeholder="Phone Number"
+					maxlength="14" 
 					required
 					onblur="telFormat()">
 					<script type="text/javascript">
 						let tel = document.getElementById('tel')
   						tel.oninvalid = function(event){
-  							event.target.setCustomValidity('Phone number should be 10 digits. e.g. (123) 456-7890')
+  							event.target.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
   						}
   						function telFormat(){
   						var numbers = tel.value.replace(/\D/g, ''),
@@ -179,7 +218,7 @@
 					name="drivers_state"
 					placeholder="Drivers License Issuing State"
 					required
-					pattern="^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$"
+					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
 					onblur="driverState()">
 					<script type="text/javascript">
 						let drivers_state = document.getElementById('drivers_state')
@@ -236,4 +275,60 @@
 		
 	</footer>
 </body>
+<script>
+	const formId = "form"; // ID of the form
+	const url = location.href; //  href for the page
+	const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+	const saveButton = document.querySelector("#save"); // select save button
+	const alertBox = document.querySelector(".alert"); // select alert display div
+	let form = document.querySelector(`#${formId}`); // select form
+
+	let formElements = form.elements; // get the elements in the form
+	const getFormData = () => {
+  	let data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
+  	let formElements = form.elements;
+  	for (const element of formElements) {
+    	if (element.name.length > 0) {
+      	data[formIdentifier][element.name] = element.value;
+    	}
+  	}
+  	return data;
+	};
+
+saveButton.onclick = event => {
+  event.preventDefault();
+  data = getFormData();
+  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+  const message = "Form draft has been saved!";
+  displayAlert(message);
+};
+
+/**
+ * This function displays a message
+ * on the page for 1 second
+ *
+ * @param {String} message
+ */
+const displayAlert = message => {
+  alertBox.innerText = message; // add the message into the alert box
+  alertBox.style.display = "block"; // make the alert box visible
+  setTimeout(function() {
+    alertBox.style.display = "none"; // hide the alert box after 1 second
+  }, 1000);
+};
+const populateForm = () => {
+  if (localStorage.key(formIdentifier)) {
+    const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
+    let formElements = form.elements;
+    for (const element of formElements) {
+      if (element.name in savedData) {
+        element.value = savedData[element.name];
+      }
+    }
+    const message = "Form has been refilled with saved data!";
+    displayAlert(message);
+  }
+};
+document.onload = populateForm(); // populate the form when the document is loaded
+</script>
 </html>
