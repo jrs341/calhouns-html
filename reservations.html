@@ -81,7 +81,7 @@
 					size="30"
 					maxlength="30"
 					autofocus
-					onchange="validateEmail(this.value)"
+					onchange="validateEmail(this)"
 					required>
 				<br>
 				<input 
@@ -89,9 +89,10 @@
 					type="phone_number"
 					name="phone_number"
 					placeholder="Phone Number"
-					pattern="^[0-9]+$"
-					maxlength="10" 
-					onchange="validatePhone(this.value)"
+					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
+					minlength="10" 
+					maxlength="14" 
+					onchange="validatePhone(this)"
 					required>
   				<br>
 				<input 
@@ -100,7 +101,7 @@
 					name="first_name"
 					placeholder="First Name"
 					pattern="^[a-zA-Z]+$"
-					onchange="capitalize(this.value)"
+					onchange="capitalize(this)"
 					required>
 				<br>
 				<input 
@@ -109,15 +110,38 @@
 					name="last_name"
 					placeholder="Last Name"
 					pattern="^[a-zA-Z]+$"
-					onblur="capitalize(this.value)"
+					onchange="capitalize(this)"
 					required>
-				<fieldset>
+				<br>
+				<input 
+					id="drivers_state"
+					type="text"
+					name="drivers_state"
+					placeholder="Drivers License Issuing State"
+					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+					minlength="2" 
+					maxlength="2" 
+					onchange="capitalize(this)"
+					required>
+				<br>
+				<input
+					id="drivers_number"
+					type="text"
+					name="drivers_number"
+					placeholder="Drivers License Number"
+					pattern="^[0-9a-zA-Z]+$"
+					maxlength="15"
+					onchange="driverNumber(this)"
+					required>
+				<br>
+			</fieldset>
+			<fieldset>
   				<input
   					id="street"
   					type="text"
   					name="street"
   					placeholder="Street Address Line 1"
-  					onchange="setAddress(this)"
+  					onchange="capitalize(this)"
   					required>
   				<br>
   				<input
@@ -125,15 +149,14 @@
   					type="text"
   					name="street2"
   					placeholder="Street Address Line 2"
-  					onchange="setAddress(this)"
-  					required>
+  					onchange="capitalize(this)">
   				<br>
   				<input
   					id="city"
   					type="text" 
   					name="city"
   					placeholder="City"
-  					onchange="setAddress(this)"
+  					onchange="capitalize(this)"
   					required>
   				<br>
   				<input 
@@ -141,20 +164,11 @@
 					type="text"
 					name="state"
 					placeholder="State"
-					pattern="^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$"
-					maxlength="2" 
-					onchange="setAddress(this)"
+					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+					minlength="2" 
+					maxlength="2"
+					onchange="capitalize(this)"
 					required>
-					<script type="text/javascript">
-						/*let state = document.getElementById('state')
-
-						state.oninvalid = function(event){
-  							event.target.setCustomValidity('Enter a valid state abbreviation')}
-						function State() {
-							let string = state.value.replace(/[^a-zA-Z]/g, '')
-							state.value = string.charAt(0).toUpperCase() + string.charAt(1).toUpperCase()
-						}*/
-					</script>
 				<br>
   				<input 
   					id="zipCode"
@@ -162,48 +176,10 @@
 					name="zipCode"
 					placeholder="Postal Code"
 					pattern="^[0-9]+$"
+					minlength="5" 
 					maxlength="5"
 					onchange="validateAddress(this)" 
 					required>
-				</fieldset>
-				<input 
-					id="drivers_state"
-					type="text"
-					name="drivers_state"
-					placeholder="Drivers License Issuing State"
-					required
-					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
-					onblur="driverState()">
-					<script type="text/javascript">
-						let drivers_state = document.getElementById('drivers_state')
-
-						drivers_state.oninvalid = function(event){
-  							event.target.setCustomValidity('Enter a valid state abbreviation')}
-						function driverState() {
-							let string = drivers_state.value.replace(/[^a-zA-Z]/g, '')
-							drivers_state.value = string.charAt(0).toUpperCase() + string.charAt(1).toUpperCase()
-						}
-					</script>
-				</fieldset>
-				<input
-					id="drivers_number"
-					type="text"
-					name="drivers_number"
-					placeholder="Drivers License Number"
-					required
-					pattern="^[0-9]*$"
-					onblur="onlyNumbers()">
-					<script type="text/javascript">
-						let drivers_number = document.getElementById('drivers_number')
-  						drivers_number.oninvalid = function(event){
-  							event.target.setCustomValidity('Only enter numbers')
-  						}
-  						function onlyNumbers(){
-							let string = drivers_number.value.replace(/[^0-9]/g, '')
-							drivers_number.value = string
-  						}
-					</script>
-				<br>
 			</fieldset>
 			<fieldset name="RV Info">
 				<input 
@@ -211,15 +187,15 @@
 					type="text"
 					name="amp"
 					placeholder="Amps"
-					required>
+					>
 			</fieldset>
 			<fieldset name="Vehicle Info">
 				<input 
-					id="amp"
+					id="vehicle_type"
 					type="text"
-					name="amp"
+					name="vehicle_type"
 					placeholder="Vehicle"
-					required>
+					>
 			</fieldset>
 			<input type="submit">
 			<button id="save">Save</button>
@@ -251,7 +227,6 @@ document.querySelector('input').addEventListener('webkitAnimationStart', onAnima
 
 /* ====== mailboxlayer.com ===== */
 const validateEmail = value => {
-	console.log(value)
 	const Http = new XMLHttpRequest()
 	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+value+'&smtp=1&format=1'
 	/*Http.open("GET", url)
@@ -267,24 +242,69 @@ const validateEmail = value => {
 	}
 }
 
-/*let tel = document.getElementById('tel')
-		tel.oninvalid = function(event){
-			event.target.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
-		}*/
-const validatePhone = (value) =>{
-	console.log('phone', value)
-	/*var numbers = value.replace(/\D/g, ''),
-	char = { 0: '(', 3: ') ', 6: '-' };
-	value = '';
-	for (var i = 0; i < numbers.length; i++) {
-	value += (char[i] || '') + numbers[i];
-	}*/
+const validatePhone = (input) =>{
+	
+	let length = input.value.replace(/[^0-9]/g,"").length
+	if(length === 10){
+		input.oninvalid = (event) => {
+		event.target.setCustomValidity('')
+		}
+		var numbers = input.value.replace(/\D/g, ''),
+		char = { 0: '(', 3: ') ', 6: '-' };
+		phoneNumberFormat = '';
+		for (var i = 0; i < numbers.length; i++) {
+		phoneNumberFormat += (char[i] || '') + numbers[i];
+		}
+		input.value = phoneNumberFormat
+		return input.value
+	} else {
+		input.oninvalid = (event) => {
+		event.target.setCustomValidity('Format should be (123) 456-7890 or enter 10 consecutive numbers')
+		}
+	}	
 }
 
 const capitalize = (value) => {
-	console.log('capital', value)
-	let string = value.replace(/[^a-zA-Z]/g, '')
-	value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+	switch(value.id){
+		case 'first_name':
+		value.value = capitalizeFirst(value.value)
+		return value.value
+		break;
+		case 'last_name':
+		value.value = capitalizeFirst(value.value)
+		return value.value
+		break;
+		case 'street':
+		value.value = capitalizeFirst(value.value)
+		setAddress(value)
+		return value.value
+		break;
+		case 'street2':
+		value.value = capitalizeFirst(value.value)
+		setAddress(value)
+		return value.value
+		break;
+		case 'city':
+		value.value = capitalizeFirst(value.value)
+		setAddress(value)
+		return value.value
+		break;
+		case 'state':
+		value.value = value.value.toUpperCase()
+		setAddress(value)
+		return value.value
+		break;
+		case 'drivers_state':
+		value.value = value.value.toUpperCase()
+		return value.value
+		break;
+		default:
+	}
+}
+
+const capitalizeFirst = (value) => {
+	let string = value.split(' ').map(w => w[0].toUpperCase()+ w.substr(1).toLowerCase()).join(' ')
+	return string
 }
 
 let address = {
@@ -296,51 +316,13 @@ let address = {
 }
 
 const setAddress = (input) => {
-	console.log('input', input)
 	address[input.id] = input.value
-	console.log('address', address)
 }
 
 const validateAddress = (input) => {
-	/*const SmartyStreetsCore = SmartyStreetsSDK.core;
-	const Lookup = SmartyStreetsSDK.usStreet.Lookup;
-
-	let authId = process.env.SMARTY_AUTH_ID;
-	let authToken = process.env.SMARTY_AUTH_TOKEN;
-	const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
-
-	let client = SmartyStreetsCore.buildClient.usStreet(credentials);
-
-// Documentation for input fields can be found at:
-// https://smartystreets.com/docs/us-street-api#input-fields
-
-	let lookup1 = new Lookup();
-	lookup1.street = address.street;
-	lookup1.street2 = address.street2;
-	lookup1.city = address.city;
-	lookup1.state = address.state;
-	lookup1.zipCode = address.zipCode;
-	lookup1.maxCandidates = 1;
-	lookup1.match = "invalid";
-
-	let batch = new SmartyStreetsCore.Batch();
-	batch.add(lookup1);
-
-client.send(batch)
-	.then(handleSuccess)
-	.catch(handleError);
-
-function handleSuccess(response) {
-	response.lookups.map(lookup => console.log(lookup.result));
-}
-
-function handleError(response) {
-	console.log(response);
-}*/
-	8126254261288690
-	const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
+	
+	/*const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
 	const Http = new XMLHttpRequest()
-	/*const urlAddress ='https://smartystreets.com/products/single-address?street='+address.street+'&street2='+address.street2+'&city='+address.city+'&state='+address.state+'&zipcode='+input.value+'&address-type=us-street-components'*/
 	Http.open("GET", urlAddress)
 	Http.send()
 	Http.onreadystatechange = (e) => {
@@ -350,7 +332,12 @@ function handleError(response) {
 		} else {
 			displayAlert('Please enter a valid email')
 		}
-	}
+	}*/
+}
+
+const driverNumber = (input) => {
+	let drivers_number = document.getElementById('drivers_number')
+	input.value = input.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
 }	
  
 	
