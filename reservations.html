@@ -226,26 +226,30 @@ const onAnimationStart = ({target, animationName}) => {
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
 
 /* ====== mailboxlayer.com ===== */
-const validateEmail = value => {
+const validateEmail = (input) => {
+	input.oninvalid = (event) => {
+	event.target.setCustomValidity('')
+	}
 	const Http = new XMLHttpRequest()
-	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+value+'&smtp=1&format=1'
+	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+input.value+'&smtp=1&format=1'
 	/*Http.open("GET", url)
 	Http.send()*/
 
 	Http.onreadystatechange = (e) => {
-			let response = JSON.parse(Http.responseText)
-			if (response.mx_found) {
-				displayAlert('Email is Valid')
-			} else {
-				displayAlert('Please enter a valid email')
+		let response = JSON.parse(Http.responseText)
+		if (response.mx_found) {
+			return
+		} else {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('Please enter a valid email address')
 			}
+		}
 	}
 }
 
 const validatePhone = (input) =>{
 	
-	let length = input.value.replace(/[^0-9]/g,"").length
-	if(length === 10){
+	if(checkForNumbers(input.value) === 10){
 		input.oninvalid = (event) => {
 		event.target.setCustomValidity('')
 		}
@@ -264,39 +268,73 @@ const validatePhone = (input) =>{
 	}	
 }
 
-const capitalize = (value) => {
-	switch(value.id){
+const checkForNumbers = (value) => {
+	let length = value.replace(/[^0-9]/g,"").length
+	return length
+}
+
+const checkForSpecialChar = (value) => {
+	specialRegex = /[^A-Z a-z]/ 
+ 	return specialRegex.test(value)
+}
+
+const checkName = (input) => {
+	input.oninvalid = (event) => {
+	event.target.setCustomValidity('')
+	}
+	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+		input.value = capitalizeFirst(input.value)
+		return input.value
+	} else {
+		input.oninvalid = (event) => {
+		event.target.setCustomValidity('Only enter letters')
+		}
+	}
+}
+
+const checkState = (input) => {
+	input.oninvalid = (event) => {
+	event.target.setCustomValidity('')
+	}
+	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+		input.value = input.value.toUpperCase()
+		setAddress(input)
+		return input.value
+	} else {
+		input.oninvalid = (event) => {
+		event.target.setCustomValidity('Only enter letters')
+		}
+	}
+}
+
+const capitalize = (input) => {
+	switch(input.id){
 		case 'first_name':
-		value.value = capitalizeFirst(value.value)
-		return value.value
+		checkName(input)
 		break;
 		case 'last_name':
-		value.value = capitalizeFirst(value.value)
-		return value.value
+		checkName(input)
 		break;
 		case 'street':
-		value.value = capitalizeFirst(value.value)
-		setAddress(value)
-		return value.value
+		input.value = capitalizeFirst(input.value)
+		setAddress(input)
+		return input.value
 		break;
 		case 'street2':
-		value.value = capitalizeFirst(value.value)
-		setAddress(value)
-		return value.value
+		input.value = capitalizeFirst(input.value)
+		setAddress(input)
+		return input.value
 		break;
 		case 'city':
-		value.value = capitalizeFirst(value.value)
-		setAddress(value)
-		return value.value
+		input.value = capitalizeFirst(input.value)
+		setAddress(input)
+		return input.value
 		break;
 		case 'state':
-		value.value = value.value.toUpperCase()
-		setAddress(value)
-		return value.value
+		checkState(input)
 		break;
 		case 'drivers_state':
-		value.value = value.value.toUpperCase()
-		return value.value
+		checkState(input)
 		break;
 		default:
 	}
