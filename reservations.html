@@ -54,16 +54,13 @@
   	<title>Calhoun's RV Retreat</title> 
   	
 </head>
-<script type="text/javascript">
-	
-</script>
 <body>
 	<header>
 		
 	</header>
 	<div class="alert"></div>
     </div>
-		<form action="" id="form" class="form">
+		<form action="" id="form" class="form" autocomplete="on">
 			<script>
 			/*document.querySelector('form.form').addEventListener('submit', function(e) {
   			e.preventDefault()
@@ -77,105 +74,58 @@
 			</script>
 			<fieldset name="personal">
 				<input
+					id="email"
 					type="email"
 					name="email"
-					id="email"
 					placeholder="Email Address"
-					
-					oninvalid
+					size="30"
+					maxlength="30"
+					autofocus
+					onchange="validateEmail(this.value)"
 					required>
-					<script type="text/javascript">
-						//onblur="validateEmail()"
-						const validateEmail = () => {
-							let email = document.getElementById('email')
-							email.addEventListener('invalid', function(event){
-								console.log('added event listener')
-							})
-							email.checkValidity()
-							if (form.personal.elements[0].reportValidity()) {
-								return
-							} else {
-							console.log('enter a valid email')
-							let email = document.getElementById('email')
-							email.checkValidity()
-							console.log('validity', email.checkValidity())
-							email.oninvalid = function(event){
-								console.log('event', event)
-
-							}
-							/*email.addEventListener('invalid', function(){
-								console.log('event listender')
-								email.oninvalid = function(event){
-									console.log('oninvalid')
-  							email.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
-  						}
-
-							})*/
-  							
-							}
-						}	
-					</script>
 				<br>
 				<input 
-					id="tel"
-					type="tel"
+					id="phone_number"
+					type="phone_number"
 					name="phone_number"
-					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" placeholder="Phone Number"
-					maxlength="14" 
-					required
-					onblur="telFormat()">
-					<script type="text/javascript">
-						let tel = document.getElementById('tel')
-  						tel.oninvalid = function(event){
-  							event.target.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
-  						}
-  						function telFormat(){
-  						var numbers = tel.value.replace(/\D/g, ''),
-        				char = { 0: '(', 3: ') ', 6: '-' };
-            			tel.value = '';
-            			for (var i = 0; i < numbers.length; i++) {
-                		tel.value += (char[i] || '') + numbers[i];
-            			}
-            		}
-  					</script>
+					placeholder="Phone Number"
+					pattern="^[0-9]+$"
+					maxlength="10" 
+					onchange="validatePhone(this.value)"
+					required>
   				<br>
 				<input 
 					id="first_name"
 					type="text"
 					name="first_name"
 					placeholder="First Name"
-					required
 					pattern="^[a-zA-Z]+$"
-					onblur="capitalize()">
-					<script type="text/javascript">
-						function capitalize() {
-							let first = document.getElementById('first_name')
-							let string = first.value.replace(/[^a-zA-Z]/g, '')
-							first.value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-						}
-					</script>
+					onchange="capitalize(this.value)"
+					required>
 				<br>
 				<input 
 					id = "last_name"
 					type="text"
 					name="last_name"
 					placeholder="Last Name"
-					required
 					pattern="^[a-zA-Z]+$"
-					onblur="capitalizeLast()">
-					<script type="text/javascript">
-						function capitalizeLast() {
-							let last = document.getElementById('last_name')
-							let string = last.value.replace(/[^a-zA-Z]/g, '')
-							last.value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-						}
-					</script>
-				<br>
+					onblur="capitalize(this.value)"
+					required>
+				<fieldset>
   				<input
-  					id="street_address"
+  					id="street"
   					type="text"
-  					name="street_address"
-  					placeholder="Street Address"
+  					name="street"
+  					placeholder="Street Address Line 1"
+  					onchange="setAddress(this)"
+  					required>
+  				<br>
+  				<input
+  					id="street2"
+  					type="text"
+  					name="street2"
+  					placeholder="Street Address Line 2"
+  					onchange="setAddress(this)"
   					required>
   				<br>
   				<input
@@ -183,6 +133,7 @@
   					type="text" 
   					name="city"
   					placeholder="City"
+  					onchange="setAddress(this)"
   					required>
   				<br>
   				<input 
@@ -190,28 +141,31 @@
 					type="text"
 					name="state"
 					placeholder="State"
-					required
 					pattern="^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$"
-					onblur="State()">
+					maxlength="2" 
+					onchange="setAddress(this)"
+					required>
 					<script type="text/javascript">
-						let state = document.getElementById('state')
+						/*let state = document.getElementById('state')
 
 						state.oninvalid = function(event){
   							event.target.setCustomValidity('Enter a valid state abbreviation')}
 						function State() {
 							let string = state.value.replace(/[^a-zA-Z]/g, '')
 							state.value = string.charAt(0).toUpperCase() + string.charAt(1).toUpperCase()
-						}
+						}*/
 					</script>
 				<br>
   				<input 
+  					id="zipCode"
 					type="text"
-					name="postal_code"
-					pattern="^((\d{5}-\d{4})|(\d{5})|([A-Z]\d[A-Z]\s\d[A-Z]\d))$"
+					name="zipCode"
 					placeholder="Postal Code"
-					required
-					>
-				<br>
+					pattern="^[0-9]+$"
+					maxlength="5"
+					onchange="validateAddress(this)" 
+					required>
+				</fieldset>
 				<input 
 					id="drivers_state"
 					type="text"
@@ -230,7 +184,7 @@
 							drivers_state.value = string.charAt(0).toUpperCase() + string.charAt(1).toUpperCase()
 						}
 					</script>
-				<br>
+				</fieldset>
 				<input
 					id="drivers_number"
 					type="text"
@@ -275,7 +229,132 @@
 		
 	</footer>
 </body>
+<script src="https://d79i1fxsrar4t.cloudfront.net/sdk/1.4.2/smartystreets-sdk-1.4.2.min.js"></script>
 <script>
+
+/* ===== Listener for Auto Fill events =====*/
+/*const AUTOFILLED = 'is-autofilled'
+const onAutoFillStart = (el) => {el.classList.add(AUTOFILLED)}
+const onAutoFillCancel = (el) => el.classList.remove(AUTOFILLED)
+const onAnimationStart = ({target, animationName}) => {
+    switch (animationName) {
+        case 'onAutoFillStart':
+        	console.log('start')
+            return onAutoFillStart(target)
+        case 'onAutoFillCancel':
+        	console.log('cancel')
+            return onAutoFillCancel(target)
+    	}
+	}
+
+document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
+
+/* ====== mailboxlayer.com ===== */
+const validateEmail = value => {
+	console.log(value)
+	const Http = new XMLHttpRequest()
+	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+value+'&smtp=1&format=1'
+	/*Http.open("GET", url)
+	Http.send()*/
+
+	Http.onreadystatechange = (e) => {
+			let response = JSON.parse(Http.responseText)
+			if (response.mx_found) {
+				displayAlert('Email is Valid')
+			} else {
+				displayAlert('Please enter a valid email')
+			}
+	}
+}
+
+/*let tel = document.getElementById('tel')
+		tel.oninvalid = function(event){
+			event.target.setCustomValidity('Phone number should be 10 digits. e.g. 1234567890')
+		}*/
+const validatePhone = (value) =>{
+	console.log('phone', value)
+	/*var numbers = value.replace(/\D/g, ''),
+	char = { 0: '(', 3: ') ', 6: '-' };
+	value = '';
+	for (var i = 0; i < numbers.length; i++) {
+	value += (char[i] || '') + numbers[i];
+	}*/
+}
+
+const capitalize = (value) => {
+	console.log('capital', value)
+	let string = value.replace(/[^a-zA-Z]/g, '')
+	value = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
+let address = {
+	street:'',
+	street2:'',
+	city:'',
+	state:'',	
+	zipCode:''
+}
+
+const setAddress = (input) => {
+	console.log('input', input)
+	address[input.id] = input.value
+	console.log('address', address)
+}
+
+const validateAddress = (input) => {
+	/*const SmartyStreetsCore = SmartyStreetsSDK.core;
+	const Lookup = SmartyStreetsSDK.usStreet.Lookup;
+
+	let authId = process.env.SMARTY_AUTH_ID;
+	let authToken = process.env.SMARTY_AUTH_TOKEN;
+	const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
+
+	let client = SmartyStreetsCore.buildClient.usStreet(credentials);
+
+// Documentation for input fields can be found at:
+// https://smartystreets.com/docs/us-street-api#input-fields
+
+	let lookup1 = new Lookup();
+	lookup1.street = address.street;
+	lookup1.street2 = address.street2;
+	lookup1.city = address.city;
+	lookup1.state = address.state;
+	lookup1.zipCode = address.zipCode;
+	lookup1.maxCandidates = 1;
+	lookup1.match = "invalid";
+
+	let batch = new SmartyStreetsCore.Batch();
+	batch.add(lookup1);
+
+client.send(batch)
+	.then(handleSuccess)
+	.catch(handleError);
+
+function handleSuccess(response) {
+	response.lookups.map(lookup => console.log(lookup.result));
+}
+
+function handleError(response) {
+	console.log(response);
+}*/
+	8126254261288690
+	const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
+	const Http = new XMLHttpRequest()
+	/*const urlAddress ='https://smartystreets.com/products/single-address?street='+address.street+'&street2='+address.street2+'&city='+address.city+'&state='+address.state+'&zipcode='+input.value+'&address-type=us-street-components'*/
+	Http.open("GET", urlAddress)
+	Http.send()
+	Http.onreadystatechange = (e) => {
+		let response = JSON.parse(Http.responseText)
+		if (response.mx_found) {
+			displayAlert('Email is Valid')
+		} else {
+			displayAlert('Please enter a valid email')
+		}
+	}
+}	
+ 
+	
+
 	const formId = "form"; // ID of the form
 	const url = location.href; //  href for the page
 	const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
