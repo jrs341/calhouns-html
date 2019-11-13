@@ -52,14 +52,47 @@
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
 	<link rel="stylesheet" href="css/alert.css">
   	<title>Calhoun's RV Retreat</title> 
-  	
+<style type="text/css">
+	.progress-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+	}
+
+	form {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: column;
+	}
+
+	fieldset {
+		-webkit-flex-direction: row;
+	}
+
+	input {
+		-webkit-flex: 20%;
+	}
+
+	label {
+		-webkit-flex: 50%;
+	}
+
+	.row {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+	}
+
+</style> 	
 </head>
 <body>
-	<header>
-		
+	<header class="progress-container">
+		<progress value="0" max="100"></progress>
 	</header>
 	<div class="alert"></div>
-    </div>
 		<form action="" id="form" class="form" autocomplete="on">
 			<script>
 			/*document.querySelector('form.form').addEventListener('submit', function(e) {
@@ -73,114 +106,156 @@
 			})*/
 			</script>
 			<fieldset name="personal">
-				<input
-					id="email"
-					type="email"
-					name="email"
-					placeholder="Email Address"
-					size="30"
-					maxlength="30"
-					autofocus
-					onchange="validateEmail(this)"
-					required>
+				<div class="row">
+					<label for="email">Email Address</label>
+					<input
+						id="email"
+						type="email"
+						name="email"
+						placeholder="you@gmail.com"
+						maxlength="30"
+						autofocus
+						onchange="validateEmail(this)"
+						required>
+				</div>
 				<br>
-				<input 
-					id="phone_number"
-					type="phone_number"
-					name="phone_number"
-					placeholder="Phone Number"
-					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
-					minlength="10" 
-					maxlength="14" 
-					onchange="validatePhone(this)"
-					required>
-  				<br>
-				<input 
-					id="first_name"
-					type="text"
-					name="first_name"
-					placeholder="First Name"
-					pattern="^[a-zA-Z]+$"
-					onchange="capitalize(this)"
-					required>
 				<br>
-				<input 
-					id = "last_name"
-					type="text"
-					name="last_name"
-					placeholder="Last Name"
-					pattern="^[a-zA-Z]+$"
-					onchange="capitalize(this)"
-					required>
+				<div class="row">
+					<label for="phone_number">Phone Number</label>
+					<input 
+						id="phone_number"
+						type="phone_number"
+						name="phone_number"
+						placeholder="(123)456-7890"
+						pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
+						minlength="10" 
+						maxlength="14" 
+						onchange="validatePhone(this)"
+						required>
+				</div>
+  		<br>
+  		<br>
+  		<div class="row">
+  			<label for="first_name">First Name</label>
+					<input 
+						id="first_name"
+						type="text"
+						name="first_name"
+						placeholder="First Name"
+						pattern="^[a-zA-Z]+$"
+						onchange="capitalize(this)"
+						required>
+				</div>
 				<br>
-				<input 
-					id="drivers_state"
-					type="text"
-					name="drivers_state"
-					placeholder="Drivers License Issuing State"
-					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
-					minlength="2" 
-					maxlength="2" 
-					onchange="capitalize(this)"
-					required>
 				<br>
-				<input
-					id="drivers_number"
-					type="text"
-					name="drivers_number"
-					placeholder="Drivers License Number"
-					pattern="^[0-9a-zA-Z]+$"
-					maxlength="15"
-					onchange="driverNumber(this)"
-					required>
+				<div class="row">
+					<label for="last_name">Last Name</label>
+					<input 
+						id = "last_name"
+						type="text"
+						name="last_name"
+						placeholder="Last Name"
+						pattern="^[a-zA-Z]+$"
+						onchange="capitalize(this)"
+						required>
+				</div>
 				<br>
+				<br>
+				<div class="row">
+					<label for="drivers_state"> Drivers License Issuing State</label>
+					<input 
+						id="drivers_state"
+						type="text"
+						name="drivers_state"
+						placeholder="ex. TX"
+						pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+						minlength="2" 
+						maxlength="2" 
+						onchange="capitalize(this)"
+						required>
+				</div>
+				<br>
+				<br>
+				<div class="row">
+					<label for="drivers_number">Drivers License Number</label>
+					<input
+						id="drivers_number"
+						type="text"
+						name="drivers_number"
+						placeholder="1234567"
+						pattern="^[0-9a-zA-Z]+$"
+						maxlength="15"
+						onchange="driverNumber(this)"
+						required>
+				</div>
 			</fieldset>
+			<br>
 			<fieldset>
-  				<input
-  					id="street"
-  					type="text"
-  					name="street"
-  					placeholder="Street Address Line 1"
-  					onchange="capitalize(this)"
-  					required>
-  				<br>
+				<div class="row">
+					<label for="street">Street Address Line 1</label>
+ 				<input
+ 					id="street"
+ 					type="text"
+ 					name="street"
+ 					placeholder="Street Address Line 1"
+ 					onchange="capitalize(this)"
+ 					required>
+ 				</div>
+ 				<br>
+ 				<br>
+ 				<div class="row">
+  				<label for="street2">Street Address Line 2</label>
   				<input
   					id="street2"
   					type="text"
   					name="street2"
   					placeholder="Street Address Line 2"
   					onchange="capitalize(this)">
+  				</div>
   				<br>
-  				<input
-  					id="city"
-  					type="text" 
-  					name="city"
-  					placeholder="City"
-  					onchange="capitalize(this)"
-  					required>
   				<br>
-  				<input 
-					id="state"
-					type="text"
-					name="state"
-					placeholder="State"
-					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
-					minlength="2" 
-					maxlength="2"
-					onchange="capitalize(this)"
-					required>
-				<br>
-  				<input 
-  					id="zipCode"
-					type="text"
-					name="zipCode"
-					placeholder="Postal Code"
-					pattern="^[0-9]+$"
-					minlength="5" 
-					maxlength="5"
-					onchange="validateAddress(this)" 
-					required>
-			</fieldset>
+  				<div class="row">
+	  				<label for="city">City</label>
+	  				<input
+	  					id="city"
+	  					type="text" 
+	  					name="city"
+	  					placeholder="City"
+	  					onchange="capitalize(this)"
+	  					required>
+	  			</div>
+  				<br>
+  				<br>
+  				<div class="row">
+	  				<label for="state">State</label>
+	  				<input 
+								id="state"
+								type="text"
+								name="state"
+								placeholder="ex. TX"
+								pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+								minlength="2" 
+								maxlength="2"
+								onchange="capitalize(this)"
+								required>
+						</div>
+						<br>
+						<br>
+						<div class="row">
+							<label for="zipCode">Zip Code</label>
+		  			<input 
+		  				id="zipCode"
+								type="text"
+								name="zipCode"
+								placeholder="567890"
+								pattern="^[0-9]+$"
+								minlength="5" 
+								maxlength="5"
+								onchange="validateAddress(this)" 
+								required>
+						</div>
+					</fieldset>
+			<br>
 			<fieldset name="RV Info">
 				<input 
 					id="amp"
@@ -189,6 +264,7 @@
 					placeholder="Amps"
 					>
 			</fieldset>
+			<br>
 			<fieldset name="Vehicle Info">
 				<input 
 					id="vehicle_type"
@@ -224,6 +300,11 @@ const onAnimationStart = ({target, animationName}) => {
 	}
 
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
+const setProgress = (value) => {
+	let progress = document.getElementsByTagName('progress')[0]
+	console.log('progress', progress)
+	return progress.value = progress.value + 10
+}
 
 /* ====== mailboxlayer.com ===== */
 const validateEmail = (input) => {
@@ -238,6 +319,7 @@ const validateEmail = (input) => {
 	Http.onreadystatechange = (e) => {
 		let response = JSON.parse(Http.responseText)
 		if (response.mx_found) {
+			setProgress()
 			return
 		} else {
 			input.oninvalid = (event) => {
@@ -260,6 +342,7 @@ const validatePhone = (input) =>{
 		phoneNumberFormat += (char[i] || '') + numbers[i];
 		}
 		input.value = phoneNumberFormat
+		setProgress()
 		return input.value
 	} else {
 		input.oninvalid = (event) => {
@@ -284,6 +367,7 @@ const checkName = (input) => {
 	}
 	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
 		input.value = capitalizeFirst(input.value)
+		setProgress()
 		return input.value
 	} else {
 		input.oninvalid = (event) => {
@@ -299,6 +383,7 @@ const checkState = (input) => {
 	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
 		input.value = input.value.toUpperCase()
 		setAddress(input)
+		setProgress()
 		return input.value
 	} else {
 		input.oninvalid = (event) => {
@@ -318,6 +403,7 @@ const capitalize = (input) => {
 		case 'street':
 		input.value = capitalizeFirst(input.value)
 		setAddress(input)
+		setProgress()
 		return input.value
 		break;
 		case 'street2':
@@ -328,6 +414,7 @@ const capitalize = (input) => {
 		case 'city':
 		input.value = capitalizeFirst(input.value)
 		setAddress(input)
+		setProgress()
 		return input.value
 		break;
 		case 'state':
