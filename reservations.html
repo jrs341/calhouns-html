@@ -53,6 +53,7 @@
 	<link rel="stylesheet" href="css/alert.css">
   	<title>Calhoun's RV Retreat</title> 
 <style type="text/css">
+
 	.progress-container {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,26 +70,49 @@
 	}
 
 	fieldset {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: column;
+	}
+
+	input{
+		max-width: 50%
+	}
+
+	input[type="reset"]{
+		justify-self: flex-start;
+	}
+
+	.buttonRow {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 		-webkit-flex-direction: row;
-	}
-
-	input {
-		-webkit-flex: 20%;
-	}
-
-	label {
-		-webkit-flex: 50%;
+		-webkit-justify-content: space-between;
 	}
 
 	.row {
 		display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+		-webkit-flex-direction: column;
 	}
 
-</style> 	
+	@media screen and (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: row;
+  }
+
+  label{
+  	width:50%;
+  }
+}
+
+</style>
+
 </head>
-<body>
+<body onload="setStyles()">
 	<header class="progress-container">
 		<progress value="0" max="100"></progress>
 	</header>
@@ -104,8 +128,19 @@
     			console.log(input[0] + ': ' + input[1])
   				}
 			})*/
+			const availibility = {cabins: 'none', rv: 'none'}
+			
 			</script>
-			<fieldset name="personal">
+			<label for="contactList">Add to Contact List</label>
+			<fieldset id="contactList" name="contactList">
+				
+			</fieldset>
+			<br>
+			<fieldset name="preliminaryQuestions">
+				
+			</fieldset>
+			<br>
+			<fieldset id='personal' name="personal">
 				<div class="row">
 					<label for="email">Email Address</label>
 					<input
@@ -118,7 +153,6 @@
 						onchange="validateEmail(this)"
 						required>
 				</div>
-				<br>
 				<br>
 				<div class="row">
 					<label for="phone_number">Phone Number</label>
@@ -134,7 +168,6 @@
 						required>
 				</div>
   		<br>
-  		<br>
   		<div class="row">
   			<label for="first_name">First Name</label>
 					<input 
@@ -146,7 +179,6 @@
 						onchange="capitalize(this)"
 						required>
 				</div>
-				<br>
 				<br>
 				<div class="row">
 					<label for="last_name">Last Name</label>
@@ -160,7 +192,66 @@
 						required>
 				</div>
 				<br>
+				<div class="row">
+					<label for="street">Street Address Line 1</label>
+ 				<input
+ 					id="street"
+ 					type="text"
+ 					name="street"
+ 					placeholder="Street Address Line 1"
+ 					onchange="capitalize(this)"
+ 					required>
+ 			</div>
 				<br>
+				<div class="row">
+ 				<label for="street2">Street Address Line 2</label>
+ 				<input
+ 					id="street2"
+ 					type="text"
+ 					name="street2"
+ 					placeholder="Street Address Line 2"
+ 					onchange="capitalize(this)">
+ 			</div>
+ 				<br>
+ 				<div class="row">
+  				<label for="city">City</label>
+  				<input
+  					id="city"
+  					type="text" 
+  					name="city"
+  					placeholder="City"
+  					onchange="capitalize(this)"
+  					required>
+  			</div>
+  			<br>
+					<div class="row">
+	 				<label for="state">State</label>
+	 				<input 
+							id="state"
+							type="text"
+							name="state"
+							placeholder="ex. TX"
+							pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+							minlength="2" 
+							maxlength="2"
+							onchange="capitalize(this)"
+							required>
+					</div>
+					<br>
+					<div class="row">
+						<label for="zipCode">Zip Code</label>
+	  			<input 
+	  				id="zipCode"
+							type="text"
+							name="zipCode"
+							placeholder="567890"
+							pattern="^[0-9]+$"
+							minlength="5" 
+							maxlength="5"
+							onchange="validateAddress(this)" 
+							required>
+					</div>
+					<br>
 				<div class="row">
 					<label for="drivers_state"> Drivers License Issuing State</label>
 					<input 
@@ -175,7 +266,6 @@
 						required>
 				</div>
 				<br>
-				<br>
 				<div class="row">
 					<label for="drivers_number">Drivers License Number</label>
 					<input
@@ -188,75 +278,16 @@
 						onchange="driverNumber(this)"
 						required>
 				</div>
+				<br>
+					<div class="buttonRow">
+					<input type="reset">
+					<button id="save">Save</button>
+					<button id="next">Next</button>
+				</div>
 			</fieldset>
 			<br>
-			<fieldset>
-				<div class="row">
-					<label for="street">Street Address Line 1</label>
- 				<input
- 					id="street"
- 					type="text"
- 					name="street"
- 					placeholder="Street Address Line 1"
- 					onchange="capitalize(this)"
- 					required>
- 				</div>
- 				<br>
- 				<br>
- 				<div class="row">
-  				<label for="street2">Street Address Line 2</label>
-  				<input
-  					id="street2"
-  					type="text"
-  					name="street2"
-  					placeholder="Street Address Line 2"
-  					onchange="capitalize(this)">
-  				</div>
-  				<br>
-  				<br>
-  				<div class="row">
-	  				<label for="city">City</label>
-	  				<input
-	  					id="city"
-	  					type="text" 
-	  					name="city"
-	  					placeholder="City"
-	  					onchange="capitalize(this)"
-	  					required>
-	  			</div>
-  				<br>
-  				<br>
-  				<div class="row">
-	  				<label for="state">State</label>
-	  				<input 
-								id="state"
-								type="text"
-								name="state"
-								placeholder="ex. TX"
-								pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
-								minlength="2" 
-								maxlength="2"
-								onchange="capitalize(this)"
-								required>
-						</div>
-						<br>
-						<br>
-						<div class="row">
-							<label for="zipCode">Zip Code</label>
-		  			<input 
-		  				id="zipCode"
-								type="text"
-								name="zipCode"
-								placeholder="567890"
-								pattern="^[0-9]+$"
-								minlength="5" 
-								maxlength="5"
-								onchange="validateAddress(this)" 
-								required>
-						</div>
-					</fieldset>
-			<br>
-			<fieldset name="RV Info">
+			<label for="rvInfo">RV Information</label>
+			<fieldset name="rvInfo">
 				<input 
 					id="amp"
 					type="text"
@@ -265,7 +296,8 @@
 					>
 			</fieldset>
 			<br>
-			<fieldset name="Vehicle Info">
+			<label for="vehicleInfo">Vehicle Information</label>
+			<fieldset name="vehicleInfo">
 				<input 
 					id="vehicle_type"
 					type="text"
@@ -302,7 +334,6 @@ const onAnimationStart = ({target, animationName}) => {
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
 const setProgress = (value) => {
 	let progress = document.getElementsByTagName('progress')[0]
-	console.log('progress', progress)
 	return progress.value = progress.value + 10
 }
 
@@ -440,8 +471,20 @@ let address = {
 	zipCode:''
 }
 
+const next = () => {
+
+}
+
 const setAddress = (input) => {
 	address[input.id] = input.value
+}
+
+const setStyles = () => {
+	console.log(document.getElementsByTagName('fieldset')[2])
+	if (availibility.cabins == 'none'  && availibility.rv == 'none') {
+				/** add a different action for the form here **/
+
+			}
 }
 
 const validateAddress = (input) => {
@@ -470,6 +513,7 @@ const driverNumber = (input) => {
 	const formId = "form"; // ID of the form
 	const url = location.href; //  href for the page
 	const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+	const nextButton = document.querySelector("#next");
 	const saveButton = document.querySelector("#save"); // select save button
 	const alertBox = document.querySelector(".alert"); // select alert display div
 	let form = document.querySelector(`#${formId}`); // select form
@@ -485,6 +529,14 @@ const driverNumber = (input) => {
   	}
   	return data;
 	};
+
+nextButton.onclick = event => {
+event.preventDefault();
+  data = getFormData();
+  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+  const message = "Form draft has been saved!";
+  displayAlert(message);
+};
 
 saveButton.onclick = event => {
   event.preventDefault();
