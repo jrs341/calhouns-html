@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
- 	<meta charset="UTF-8">
+ <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<script type="application/ld+json">
 	{
-	  "@context": "http://schema.org",
-	  "@type": [
-	  "RVPark",
-	  "Campground",
-	  "LodgingBusiness"
-	  ],
-	  "name": "Calhoun's Riverside RV Retreat",
-	  "openingHours": [
-	    "Mo-Fr 09:00-18:00",
-	    "Sa-Su 09:00-16:00"
-	    ],
-	  "telephone": "(361) 550-7536",
-	  "url": "https://www.calhounsriversidervretreat.com",
-	  "image": "https://www.calhounsriversidervretreat.com/css/images/circleC.png",
-	  "priceRange": "$$",
-	  "hasMap": 		"https://www.google.com/maps/place/125+Haeber+Ln,+Tivoli,+TX+77990/@28.4767777,-96.8629815,17z/data=!3m1!4b1!4m5!3m4!1s0x8669d8eb4b1185b9:0xc2267a66b6d7b93c!8m2!3d28.4767777!4d-96.8607928",
-	  "checkinTime": "14:00",
-	  "checkoutTime": "12:00",
-	  "address": {
-	    "@type": "PostalAddress",
-	    "addressLocality": "Tivoli",
-	    "addressRegion": "TX",
-	    "postalCode": "77990",
-	    "streetAddress": "125 Haeber Ln"
-	  },
-	  "aggregateRating": {
-	    "@type": "AggregateRating",
-	    "ratingValue": "4.5",
-	    "reviewCount": "27"
-	  },
-	   "geo": {
-	    "@type": [
-	    "GeoCoordinates",
-	    "GeoCircle"
-	    ],
-	    "latitude": "28.477294",
-	    "longitude": "-96.861032",
-	    "geoRadius": "45000"
+  "@context": "http://schema.org",
+  "@type": [
+  "RVPark",
+  "Campground",
+  "LodgingBusiness"
+  ],
+  "name": "Calhoun's Riverside RV Retreat",
+  "openingHours": [
+    "Mo-Fr 09:00-18:00",
+    "Sa-Su 09:00-16:00"
+    ],
+  "telephone": "(361) 550-7536",
+  "url": "https://www.calhounsriversidervretreat.com",
+  "image": "https://www.calhounsriversidervretreat.com/css/images/circleC.png",
+  "priceRange": "$$",
+  "hasMap": 		"https://www.google.com/maps/place/125+Haeber+Ln,+Tivoli,+TX+77990/@28.4767777,-96.8629815,17z/data=!3m1!4b1!4m5!3m4!1s0x8669d8eb4b1185b9:0xc2267a66b6d7b93c!8m2!3d28.4767777!4d-96.8607928",
+  "checkinTime": "14:00",
+  "checkoutTime": "12:00",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Tivoli",
+    "addressRegion": "TX",
+    "postalCode": "77990",
+    "streetAddress": "125 Haeber Ln"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "27"
+  },
+   "geo": {
+    "@type": [
+    "GeoCoordinates",
+    "GeoCircle"
+    ],
+    "latitude": "28.477294",
+    "longitude": "-96.861032",
+    "geoRadius": "45000"
 	  }
 	 }
 	</script>
@@ -51,7 +51,7 @@
 	<meta name="author" content="Jason Sinn">
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
 	<link rel="stylesheet" href="css/alert.css">
-  	<title>Calhoun's RV Retreat</title> 
+ <title>Calhoun's RV Retreat</title> 
 <style type="text/css">
 
 	.progress-container {
@@ -112,203 +112,312 @@
 </style>
 
 </head>
-<body onload="setStyles()">
+<body>
 	<header class="progress-container">
 		<progress value="0" max="100"></progress>
 	</header>
 	<div class="alert"></div>
-		<form action="" id="form" class="form" autocomplete="on">
-			<script>
+	<div id="form"></div>
+		<script>
 			/*document.querySelector('form.form').addEventListener('submit', function(e) {
-  			e.preventDefault()
-  				const formData = new FormData(this)
-  				const entires = formData.entries()
+ 			e.preventDefault()
+ 				const formData = new FormData(this)
+ 				const entires = formData.entries()
 
-  				for (var input of entires) {
-    			console.log(input[0] + ': ' + input[1])
-  				}
-			})*/
-			const availibility = {cabins: 'none', rv: 'none'}
-			
-			</script>
-			<label for="contactList">Add to Contact List</label>
-			<fieldset id="contactList" name="contactList">
-				
-			</fieldset>
+ 				for (var input of entires) {
+   			console.log(input[0] + ': ' + input[1])
+ 				}
+		})*/
+			const basicInfoHTML =
+				`<div class="row">
+				<label for="email">Email Address</label>
+				<input
+					id="email"
+					type="email"
+					name="email"
+					placeholder="you@gmail.com"
+					maxlength="30"
+					autofocus
+					onchange="validateEmail(this)"
+					required>
+			</div>
 			<br>
-			<fieldset name="preliminaryQuestions">
-				
-			</fieldset>
+			<div class="row">
+				<label for="phone_number">Phone Number</label>
+				<input 
+					id="phone_number"
+					type="phone_number"
+					name="phone_number"
+					placeholder="(123)456-7890"
+					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
+					minlength="10" 
+					maxlength="14" 
+					onchange="validatePhone(this)"
+					required>
+			</div>
+ 		<br>
+ 		<div class="row">
+ 			<label for="first_name">First Name</label>
+				<input 
+					id="first_name"
+					type="text"
+					name="first_name"
+					placeholder="First Name"
+					pattern="^[a-zA-Z]+$"
+					onchange="capitalize(this)"
+					required>
+			</div>
 			<br>
-			<fieldset id='personal' name="personal">
-				<div class="row">
-					<label for="email">Email Address</label>
-					<input
-						id="email"
-						type="email"
-						name="email"
-						placeholder="you@gmail.com"
-						maxlength="30"
-						autofocus
-						onchange="validateEmail(this)"
-						required>
-				</div>
+			<div class="row">
+				<label for="last_name">Last Name</label>
+				<input 
+					id = "last_name"
+					type="text"
+					name="last_name"
+					placeholder="Last Name"
+					pattern="^[a-zA-Z]+$"
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>`
+
+		const addressHTML = 
+		`<div class="row">
+				<label for="street">Street Address Line 1</label>
+				<input
+					id="street"
+					type="text"
+					name="street"
+					placeholder="Street Address Line 1"
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>
+			<div class="row">
+				<label for="street2">Street Address Line 2</label>
+				<input
+					id="street2"
+					type="text"
+					name="street2"
+					placeholder="Street Address Line 2"
+					onchange="capitalize(this)">
+			</div>
 				<br>
 				<div class="row">
-					<label for="phone_number">Phone Number</label>
-					<input 
-						id="phone_number"
-						type="phone_number"
-						name="phone_number"
-						placeholder="(123)456-7890"
-						pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
-						minlength="10" 
-						maxlength="14" 
-						onchange="validatePhone(this)"
-						required>
-				</div>
-  		<br>
-  		<div class="row">
-  			<label for="first_name">First Name</label>
-					<input 
-						id="first_name"
-						type="text"
-						name="first_name"
-						placeholder="First Name"
-						pattern="^[a-zA-Z]+$"
-						onchange="capitalize(this)"
-						required>
-				</div>
-				<br>
-				<div class="row">
-					<label for="last_name">Last Name</label>
-					<input 
-						id = "last_name"
-						type="text"
-						name="last_name"
-						placeholder="Last Name"
-						pattern="^[a-zA-Z]+$"
-						onchange="capitalize(this)"
-						required>
-				</div>
-				<br>
-				<div class="row">
-					<label for="street">Street Address Line 1</label>
+ 				<label for="city">City</label>
  				<input
- 					id="street"
- 					type="text"
- 					name="street"
- 					placeholder="Street Address Line 1"
+ 					id="city"
+ 					type="text" 
+ 					name="city"
+ 					placeholder="City"
  					onchange="capitalize(this)"
  					required>
  			</div>
-				<br>
+ 			<br>
 				<div class="row">
- 				<label for="street2">Street Address Line 2</label>
- 				<input
- 					id="street2"
- 					type="text"
- 					name="street2"
- 					placeholder="Street Address Line 2"
- 					onchange="capitalize(this)">
- 			</div>
- 				<br>
- 				<div class="row">
-  				<label for="city">City</label>
-  				<input
-  					id="city"
-  					type="text" 
-  					name="city"
-  					placeholder="City"
-  					onchange="capitalize(this)"
-  					required>
-  			</div>
-  			<br>
-					<div class="row">
-	 				<label for="state">State</label>
-	 				<input 
-							id="state"
-							type="text"
-							name="state"
-							placeholder="ex. TX"
-							pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
-							minlength="2" 
-							maxlength="2"
-							onchange="capitalize(this)"
-							required>
-					</div>
-					<br>
-					<div class="row">
-						<label for="zipCode">Zip Code</label>
-	  			<input 
-	  				id="zipCode"
-							type="text"
-							name="zipCode"
-							placeholder="567890"
-							pattern="^[0-9]+$"
-							minlength="5" 
-							maxlength="5"
-							onchange="validateAddress(this)" 
-							required>
-					</div>
-					<br>
-				<div class="row">
-					<label for="drivers_state"> Drivers License Issuing State</label>
-					<input 
-						id="drivers_state"
+ 				<label for="state">State</label>
+ 				<input 
+						id="state"
 						type="text"
-						name="drivers_state"
+						name="state"
 						placeholder="ex. TX"
 						pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
 						minlength="2" 
-						maxlength="2" 
+						maxlength="2"
 						onchange="capitalize(this)"
 						required>
 				</div>
 				<br>
 				<div class="row">
-					<label for="drivers_number">Drivers License Number</label>
-					<input
-						id="drivers_number"
+					<label for="zipCode">Zip Code</label>
+  			<input 
+  				id="zipCode"
 						type="text"
-						name="drivers_number"
-						placeholder="1234567"
-						pattern="^[0-9a-zA-Z]+$"
-						maxlength="15"
-						onchange="driverNumber(this)"
+						name="zipCode"
+						placeholder="567890"
+						pattern="^[0-9]+$"
+						minlength="5" 
+						maxlength="5"
+						onchange="validateAddress(this)" 
 						required>
 				</div>
-				<br>
-					<div class="buttonRow">
-					<input type="reset">
-					<button id="save">Save</button>
-					<button id="next">Next</button>
-				</div>
-			</fieldset>
-			<br>
-			<label for="rvInfo">RV Information</label>
-			<fieldset name="rvInfo">
+				<br>`
+
+			const driverInfoHTML = 
+			`<div class="row">
+				<label for="drivers_state"> Drivers License Issuing State</label>
 				<input 
-					id="amp"
+					id="drivers_state"
 					type="text"
-					name="amp"
-					placeholder="Amps"
-					>
-			</fieldset>
+					name="drivers_state"
+					placeholder="ex. TX"
+					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+					minlength="2" 
+					maxlength="2" 
+					onchange="capitalize(this)"
+					required>
+			</div>
 			<br>
-			<label for="vehicleInfo">Vehicle Information</label>
-			<fieldset name="vehicleInfo">
-				<input 
-					id="vehicle_type"
+			<div class="row">
+				<label for="drivers_number">Drivers License Number</label>
+				<input
+					id="drivers_number"
 					type="text"
-					name="vehicle_type"
-					placeholder="Vehicle"
-					>
-			</fieldset>
-			<input type="submit">
-			<button id="save">Save</button>
-			<input type="reset">
-		</form>
+					name="drivers_number"
+					placeholder="1234567"
+					pattern="^[0-9a-zA-Z]+$"
+					maxlength="15"
+					onchange="driverNumber(this)"
+					required>
+			</div>
+			<br>`
+
+			const formButtonsHTML =
+			`<div class="buttonRow">
+				<input type="reset">
+				<button id="save">Save</button>
+				<button id="next">Next</button>
+			</div>`
+			
+			const availibility = /*{cabins: 'none', rv: 'none'}*/ 'something'
+			let form = document.createElement('form')
+			let fieldset = document.createElement('fieldset')
+
+			const basicInfo = (availability) => {
+			
+			if (availability.cabin == 'none' || availability.rv == 'none') {
+				form.id = 'callList'
+				form.innerHTML = `<fieldset>` + basicInfoHTML + formButtonsHTML + `</fieldset>`
+			} else {
+				form.innerHTML = `<fieldset>` + basicInfoHTML + addressHTML + formButtonsHTML + `</fieldset>`
+			}
+			document.getElementById('form').appendChild(form)
+			}
+	
+	basicInfo(availibility)
+
+		const capitalize = (input) => {
+			switch(input.id){
+				case 'first_name':
+				checkName(input)
+				break;
+				case 'last_name':
+				checkName(input)
+				break;
+				case 'street':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				setProgress()
+				return input.value
+				break;
+				case 'street2':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				return input.value
+				break;
+				case 'city':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				setProgress()
+				return input.value
+				break;
+				case 'state':
+				checkState(input)
+				break;
+				case 'drivers_state':
+				checkState(input)
+				break;
+				default:
+			}
+		}
+		
+		const checkForNumbers = (value) => {
+			let length = value.replace(/[^0-9]/g,"").length
+			return length
+		}
+
+		const checkForSpecialChar = (value) => {
+			specialRegex = /[^A-Z a-z]/ 
+		 	return specialRegex.test(value)
+		}
+
+		const checkName = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+				input.value = capitalizeFirst(input.value)
+				setProgress()
+				return input.value
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Only enter letters')
+				}
+			}
+		}
+
+		const checkState = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+				input.value = input.value.toUpperCase()
+				setAddress(input)
+				setProgress()
+				return input.value
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Only enter letters')
+				}
+			}
+		}
+
+/* ====== mailboxlayer.com ===== */
+		const validateEmail = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			const Http = new XMLHttpRequest()
+			const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+input.value+'&smtp=1&format=1'
+			/*Http.open("GET", url)
+			Http.send()*/
+
+			Http.onreadystatechange = (e) => {
+				let response = JSON.parse(Http.responseText)
+				if (response.mx_found) {
+					console.log('email', response)
+					setProgress()
+					return
+				} else {
+					input.oninvalid = (event) => {
+					event.target.setCustomValidity('Please enter a valid email address')
+					}
+				}
+			}
+		}
+
+		const validatePhone = (input) =>{
+	
+			if(checkForNumbers(input.value) === 10){
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('')
+				}
+				var numbers = input.value.replace(/\D/g, ''),
+				char = { 0: '(', 3: ') ', 6: '-' };
+				phoneNumberFormat = '';
+				for (var i = 0; i < numbers.length; i++) {
+				phoneNumberFormat += (char[i] || '') + numbers[i];
+				}
+				input.value = phoneNumberFormat
+				setProgress()
+				return input.value
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Format should be (123) 456-7890 or enter 10 consecutive numbers')
+				}
+			}	
+		}
+		</script>
 	<footer>
 		
 	</footer>
@@ -332,20 +441,22 @@ const onAnimationStart = ({target, animationName}) => {
 	}
 
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
+
+
 const setProgress = (value) => {
 	let progress = document.getElementsByTagName('progress')[0]
 	return progress.value = progress.value + 10
 }
 
-/* ====== mailboxlayer.com ===== */
-const validateEmail = (input) => {
+
+/*const validateEmail = (input) => {
 	input.oninvalid = (event) => {
 	event.target.setCustomValidity('')
 	}
 	const Http = new XMLHttpRequest()
 	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+input.value+'&smtp=1&format=1'
-	/*Http.open("GET", url)
-	Http.send()*/
+	Http.open("GET", url)
+	Http.send()
 
 	Http.onreadystatechange = (e) => {
 		let response = JSON.parse(Http.responseText)
@@ -457,7 +568,7 @@ const capitalize = (input) => {
 		default:
 	}
 }
-
+*/
 const capitalizeFirst = (value) => {
 	let string = value.split(' ').map(w => w[0].toUpperCase()+ w.substr(1).toLowerCase()).join(' ')
 	return string
@@ -477,14 +588,6 @@ const next = () => {
 
 const setAddress = (input) => {
 	address[input.id] = input.value
-}
-
-const setStyles = () => {
-	console.log(document.getElementsByTagName('fieldset')[2])
-	if (availibility.cabins == 'none'  && availibility.rv == 'none') {
-				/** add a different action for the form here **/
-
-			}
 }
 
 const validateAddress = (input) => {
