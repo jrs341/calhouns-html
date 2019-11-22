@@ -289,10 +289,10 @@
 			
 			const rentalDatesHTML = 
 			`<label for="checkinDate"> Checkin Date </label>
-				<input type="date" id="checkinDate">
+				<input type="date" id="checkinDate" required>
 				<br>
 				<label for="checkoutDate"> Checkout Date </label>
-				<input type="date" id="checkoutDate">
+				<input type="date" id="checkoutDate" required>
 				<br>
 			`
 			const rentalRateHTML =
@@ -304,7 +304,10 @@
 				<input type="checkbox" class="checkbox" id="monthly" value="monthly" onclick="rentalRate('checkbox')" required>
 				<br>`
 
-			const availibility = {cabins: 'none', rv: 'none'}
+				const submitButtonHTML = 
+				`<input type="submit">
+				`
+			const availibility = /*{cabins: 'none', rv: 'none'}*/ 'something'
 			let form = document.createElement('form')
 			let fieldset = document.createElement('fieldset')
 
@@ -315,7 +318,7 @@
 				form.innerHTML = `
 				<h1> Currently Calhoun's does not have any vacancies, please fill out the form below if you would like to be notified when an RV space or cabin becomes avaialble
 				</h1>
-				<fieldset>` + rentalRateHTML + rentalDatesHTML + basicInfoHTML + formButtonsHTML + `</fieldset>`
+				<fieldset>` + rentalRateHTML + rentalDatesHTML + basicInfoHTML + submitButtonHTML + `</fieldset>`
 			} else {
 				form.id = 'checkin'
 				form.innerHTML = `<fieldset>` + basicInfoHTML + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
