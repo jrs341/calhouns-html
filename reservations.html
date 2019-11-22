@@ -119,6 +119,14 @@
 	<div class="alert"></div>
 	<div id="form"></div>
 		<script>
+
+			let address = {
+				street:'',
+				street2:'',
+				city:'',
+				state:'',	
+				zipCode:''
+			}
 			/*document.querySelector('form.form').addEventListener('submit', function(e) {
  			e.preventDefault()
  				const formData = new FormData(this)
@@ -146,7 +154,7 @@
 				<label for="phone_number">Phone Number</label>
 				<input 
 					id="phone_number"
-					type="phone_number"
+					type="tel"
 					name="phone_number"
 					placeholder="(123)456-7890"
 					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
@@ -279,7 +287,24 @@
 				<button id="next">Next</button>
 			</div>`
 			
-			const availibility = /*{cabins: 'none', rv: 'none'}*/ 'something'
+			const rentalDatesHTML = 
+			`<label for="checkinDate"> Checkin Date </label>
+				<input type="date" id="checkinDate">
+				<br>
+				<label for="checkoutDate"> Checkout Date </label>
+				<input type="date" id="checkoutDate">
+				<br>
+			`
+			const rentalRateHTML =
+			`<label for="daily"> Daily </label>
+				<input type="checkbox" class="checkbox" id="daily" value="daily" onclick="rentalRate('checkbox')" required>
+				<label for="weekly"> Weekly </label>
+				<input type="checkbox" class="checkbox" id="weekly" value="weekly" onclick="rentalRate('checkbox')" required>
+				<label for="monthly"> Monthly </label>
+				<input type="checkbox" class="checkbox" id="monthly" value="monthly" onclick="rentalRate('checkbox')" required>
+				<br>`
+
+			const availibility = {cabins: 'none', rv: 'none'}
 			let form = document.createElement('form')
 			let fieldset = document.createElement('fieldset')
 
@@ -287,9 +312,13 @@
 			
 			if (availability.cabin == 'none' || availability.rv == 'none') {
 				form.id = 'callList'
-				form.innerHTML = `<fieldset>` + basicInfoHTML + formButtonsHTML + `</fieldset>`
+				form.innerHTML = `
+				<h1> Currently Calhoun's does not have any vacancies, please fill out the form below if you would like to be notified when an RV space or cabin becomes avaialble
+				</h1>
+				<fieldset>` + rentalRateHTML + rentalDatesHTML + basicInfoHTML + formButtonsHTML + `</fieldset>`
 			} else {
-				form.innerHTML = `<fieldset>` + basicInfoHTML + addressHTML + formButtonsHTML + `</fieldset>`
+				form.id = 'checkin'
+				form.innerHTML = `<fieldset>` + basicInfoHTML + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
 			}
 			document.getElementById('form').appendChild(form)
 			}
@@ -330,7 +359,12 @@
 				default:
 			}
 		}
-		
+
+		const capitalizeFirst = (value) => {
+			let string = value.split(' ').map(w => w[0].toUpperCase()+ w.substr(1).toLowerCase()).join(' ')
+			return string
+		}
+
 		const checkForNumbers = (value) => {
 			let length = value.replace(/[^0-9]/g,"").length
 			return length
@@ -372,6 +406,58 @@
 			}
 		}
 
+		const driverNumber = (input) => {
+			let drivers_number = document.getElementById('drivers_number')
+			input.value = input.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
+		}	
+
+		const rentalRate = (elClass) => {
+			let el=document.getElementsByClassName(elClass)
+				let atLeastOneChecked=false
+	   for (i=0; i<el.length; i++) {
+     if (el[i].checked === true) {
+      atLeastOneChecked=true 
+     } else {
+     	el[i].disabled = true
+     }
+ 			}
+ 			if (atLeastOneChecked === true) {
+     for (i=0; i<el.length; i++) {
+      el[i].required = false
+     }
+ 			} else {
+     for (i=0; i<el.length; i++) {
+      el[i].disabled = false
+      el[i].required = true
+     }
+ 		}
+		}
+
+		const setAddress = (input) => {
+			address[input.id] = input.value
+		}
+
+		const setProgress = (value) => {
+			let progress = document.getElementsByTagName('progress')[0]
+			return progress.value = progress.value + 10
+		}
+
+		const validateAddress = (input) => {
+	
+			/*const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
+			const Http = new XMLHttpRequest()
+			Http.open("GET", urlAddress)
+			Http.send()
+			Http.onreadystatechange = (e) => {
+				let response = JSON.parse(Http.responseText)
+				if (response.mx_found) {
+					displayAlert('Email is Valid')
+				} else {
+					displayAlert('Please enter a valid email')
+				}
+			}*/
+		}
+
 /* ====== mailboxlayer.com ===== */
 		const validateEmail = (input) => {
 			input.oninvalid = (event) => {
@@ -385,7 +471,6 @@
 			Http.onreadystatechange = (e) => {
 				let response = JSON.parse(Http.responseText)
 				if (response.mx_found) {
-					console.log('email', response)
 					setProgress()
 					return
 				} else {
@@ -411,6 +496,10 @@
 				input.value = phoneNumberFormat
 				setProgress()
 				return input.value
+			} else if (input.value.length > 10 || input.value.length < 10) {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Phone number should be 10 digitis')
+			}
 			} else {
 				input.oninvalid = (event) => {
 				event.target.setCustomValidity('Format should be (123) 456-7890 or enter 10 consecutive numbers')
@@ -442,176 +531,6 @@ const onAnimationStart = ({target, animationName}) => {
 
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
 
-
-const setProgress = (value) => {
-	let progress = document.getElementsByTagName('progress')[0]
-	return progress.value = progress.value + 10
-}
-
-
-/*const validateEmail = (input) => {
-	input.oninvalid = (event) => {
-	event.target.setCustomValidity('')
-	}
-	const Http = new XMLHttpRequest()
-	const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+input.value+'&smtp=1&format=1'
-	Http.open("GET", url)
-	Http.send()
-
-	Http.onreadystatechange = (e) => {
-		let response = JSON.parse(Http.responseText)
-		if (response.mx_found) {
-			setProgress()
-			return
-		} else {
-			input.oninvalid = (event) => {
-			event.target.setCustomValidity('Please enter a valid email address')
-			}
-		}
-	}
-}
-
-const validatePhone = (input) =>{
-	
-	if(checkForNumbers(input.value) === 10){
-		input.oninvalid = (event) => {
-		event.target.setCustomValidity('')
-		}
-		var numbers = input.value.replace(/\D/g, ''),
-		char = { 0: '(', 3: ') ', 6: '-' };
-		phoneNumberFormat = '';
-		for (var i = 0; i < numbers.length; i++) {
-		phoneNumberFormat += (char[i] || '') + numbers[i];
-		}
-		input.value = phoneNumberFormat
-		setProgress()
-		return input.value
-	} else {
-		input.oninvalid = (event) => {
-		event.target.setCustomValidity('Format should be (123) 456-7890 or enter 10 consecutive numbers')
-		}
-	}	
-}
-
-const checkForNumbers = (value) => {
-	let length = value.replace(/[^0-9]/g,"").length
-	return length
-}
-
-const checkForSpecialChar = (value) => {
-	specialRegex = /[^A-Z a-z]/ 
- 	return specialRegex.test(value)
-}
-
-const checkName = (input) => {
-	input.oninvalid = (event) => {
-	event.target.setCustomValidity('')
-	}
-	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
-		input.value = capitalizeFirst(input.value)
-		setProgress()
-		return input.value
-	} else {
-		input.oninvalid = (event) => {
-		event.target.setCustomValidity('Only enter letters')
-		}
-	}
-}
-
-const checkState = (input) => {
-	input.oninvalid = (event) => {
-	event.target.setCustomValidity('')
-	}
-	if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
-		input.value = input.value.toUpperCase()
-		setAddress(input)
-		setProgress()
-		return input.value
-	} else {
-		input.oninvalid = (event) => {
-		event.target.setCustomValidity('Only enter letters')
-		}
-	}
-}
-
-const capitalize = (input) => {
-	switch(input.id){
-		case 'first_name':
-		checkName(input)
-		break;
-		case 'last_name':
-		checkName(input)
-		break;
-		case 'street':
-		input.value = capitalizeFirst(input.value)
-		setAddress(input)
-		setProgress()
-		return input.value
-		break;
-		case 'street2':
-		input.value = capitalizeFirst(input.value)
-		setAddress(input)
-		return input.value
-		break;
-		case 'city':
-		input.value = capitalizeFirst(input.value)
-		setAddress(input)
-		setProgress()
-		return input.value
-		break;
-		case 'state':
-		checkState(input)
-		break;
-		case 'drivers_state':
-		checkState(input)
-		break;
-		default:
-	}
-}
-*/
-const capitalizeFirst = (value) => {
-	let string = value.split(' ').map(w => w[0].toUpperCase()+ w.substr(1).toLowerCase()).join(' ')
-	return string
-}
-
-let address = {
-	street:'',
-	street2:'',
-	city:'',
-	state:'',	
-	zipCode:''
-}
-
-const next = () => {
-
-}
-
-const setAddress = (input) => {
-	address[input.id] = input.value
-}
-
-const validateAddress = (input) => {
-	
-	/*const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
-	const Http = new XMLHttpRequest()
-	Http.open("GET", urlAddress)
-	Http.send()
-	Http.onreadystatechange = (e) => {
-		let response = JSON.parse(Http.responseText)
-		if (response.mx_found) {
-			displayAlert('Email is Valid')
-		} else {
-			displayAlert('Please enter a valid email')
-		}
-	}*/
-}
-
-const driverNumber = (input) => {
-	let drivers_number = document.getElementById('drivers_number')
-	input.value = input.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
-}	
- 
-	
 
 	const formId = "form"; // ID of the form
 	const url = location.href; //  href for the page
