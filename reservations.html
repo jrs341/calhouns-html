@@ -49,7 +49,7 @@
 	</script>
 	<meta name="description" content="RV Park">
 	<meta name="author" content="Jason Sinn">
-	<link rel="shortcut icon" href="./css/images/favicon.ico">
+	<!--<link rel="shortcut icon" href="./css/images/favicon.ico">-->
 	<link rel="stylesheet" href="css/alert.css">
  <title>Calhoun's RV Retreat</title> 
 <style type="text/css">
@@ -144,7 +144,7 @@
 					type="email"
 					name="email"
 					placeholder="you@gmail.com"
-					maxlength="30"
+					maxlength="50"
 					autofocus
 					onchange="validateEmail(this)"
 					required>
@@ -157,7 +157,7 @@
 					type="tel"
 					name="phone_number"
 					placeholder="(123)456-7890"
-					pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"
+					
 					minlength="10" 
 					maxlength="14" 
 					onchange="validatePhone(this)"
@@ -307,23 +307,40 @@
 				const submitButtonHTML = 
 				`<input type="submit">
 				`
-			const availibility = /*{cabins: 'none', rv: 'none'}*/ 'something'
-			let form = document.createElement('form')
+			const availibility = {cabins: 'none', rv: 'some'}
+			let formHTML = document.createElement('form')
+			formHTML.method = "post"
 			let fieldset = document.createElement('fieldset')
+			let page = 0
 
 			const basicInfo = (availability) => {
-			
+			console.log('localStorage', localStorage)
+			if (localStorage.hasOwnProperty('checkin')){
+				page = JSON.parse(localStorage.checkin).page
+			}
 			if (availability.cabin == 'none' || availability.rv == 'none') {
-				form.id = 'callList'
-				form.innerHTML = `
+				formHTML.id = 'callList'
+				formHTML.innerHTML = `
 				<h1> Currently Calhoun's does not have any vacancies, please fill out the form below if you would like to be notified when an RV space or cabin becomes avaialble
 				</h1>
 				<fieldset>` + rentalRateHTML + rentalDatesHTML + basicInfoHTML + submitButtonHTML + `</fieldset>`
 			} else {
-				form.id = 'checkin'
-				form.innerHTML = `<fieldset>` + basicInfoHTML + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
+				formHTML.id = 'checkin'
+				switch(page){
+					case 0 :
+					formHTML.innerHTML = `<fieldset>` + basicInfoHTML + formButtonsHTML + `</fieldset>`
+					break;
+					case 1 :
+					formHTML.innerHTML = `<fieldset>` + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
+					break;
+					case 2 :
+					`<h1> Your Done <h1>`
+					break;
+					default :
+					`<h1> Oops Somenthing Went Wrong </h1>`
+				}
 			}
-			document.getElementById('form').appendChild(form)
+			document.getElementById('form').appendChild(formHTML)
 			}
 	
 	basicInfo(availibility)
@@ -535,9 +552,10 @@ const onAnimationStart = ({target, animationName}) => {
 document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
 
 
-	const formId = "form"; // ID of the form
+	const formId = "checkin"; // ID of the form
 	const url = location.href; //  href for the page
-	const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+	//const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+	const formIdentifier = `${formId}`; // Identifier used to identify the form
 	const nextButton = document.querySelector("#next");
 	const saveButton = document.querySelector("#save"); // select save button
 	const alertBox = document.querySelector(".alert"); // select alert display div
@@ -545,23 +563,69 @@ document.querySelector('input').addEventListener('webkitAnimationStart', onAnima
 
 	let formElements = form.elements; // get the elements in the form
 	const getFormData = () => {
-  	let data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
+		let data
+			console.log('localStorage[formIdentifier', localStorage[formIdentifier])
+			if (localStorage[formIdentifier] == undefined) {
+				data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
+				console.log('getFormData data if', data)
+			} else {
+				data = JSON.parse(localStorage[formIdentifier])
+				console.log('getFormData data else', data)
+			}
+  	
   	let formElements = form.elements;
+
   	for (const element of formElements) {
     	if (element.name.length > 0) {
+    		element.oninvalid = (event) => {
+						event.target.setCustomValidity('')
+						}
+    		if (element.checkValidity()){
+    			console.log('checkValidity', data[formIdentifier])
+    			if (data[formIdentifier] == undefined) {
+    				data = { [formIdentifier]: JSON.parse(localStorage[formIdentifier])}
+    				console.log('data after parse', data)
+    				data[formIdentifier][element.name] = element.value
+    			} else {
       	data[formIdentifier][element.name] = element.value;
+    			}
+    		} else {
+    			document.querySelector('#'+ element.id).setCustomValidity('Enter a valid ' + element.id)
+    			document.querySelector('#' + element.id).reportValidity()
+    		}
     	}
   	}
+  	console.log('data', data)
   	return data;
 	};
 
 nextButton.onclick = event => {
 event.preventDefault();
-  data = getFormData();
-  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+  data = getFormData()
+
+  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+  
+  let localData = JSON.parse(localStorage.checkin)
+
+  if (form.checkValidity()) {
+  	console.log('hasOwnProperty', localData)
+	  if (localData.hasOwnProperty('page')){
+	  	console.log('has page')
+	  	data[formIdentifier].page = data[formIdentifier].page + 1
+	  } else {
+	  	console.log('else')
+	  	data[formIdentifier].page = 1
+	  
+	  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+		 basicInfo(availibility)
+		 }
+	 } else {
+
+	 }
+
   const message = "Form draft has been saved!";
-  displayAlert(message);
-};
+  displayAlert(message)
+}
 
 saveButton.onclick = event => {
   event.preventDefault();
