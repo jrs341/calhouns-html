@@ -334,7 +334,7 @@
 					formHTML.innerHTML = `<fieldset>` + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
 					break;
 					case 2 :
-					`<h1> Your Done <h1>`
+					`<h1> Your Done <h1>` + formButtonsHTML
 					break;
 					default :
 					`<h1> Oops Somenthing Went Wrong </h1>`
@@ -595,11 +595,11 @@ document.querySelector('input').addEventListener('webkitAnimationStart', onAnima
     		}
     	}
   	}
-  	console.log('data', data)
   	return data;
 	};
 
 nextButton.onclick = event => {
+//const next = event => {
 event.preventDefault();
   data = getFormData()
 
@@ -610,14 +610,18 @@ event.preventDefault();
   if (form.checkValidity()) {
   	console.log('hasOwnProperty', localData)
 	  if (localData.hasOwnProperty('page')){
-	  	console.log('has page')
+	  	console.log('has page', data[formIdentifier].page)
 	  	data[formIdentifier].page = data[formIdentifier].page + 1
+	  	localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+		 	basicInfo(availibility)
+		 	location.reload()
 	  } else {
 	  	console.log('else')
 	  	data[formIdentifier].page = 1
 	  
 	  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
 		 basicInfo(availibility)
+		 location.reload()
 		 }
 	 } else {
 
