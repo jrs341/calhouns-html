@@ -7,14 +7,8 @@ import { MajorAxis } from './majorAxis.js'
 import { MinorAxis } from './minorAxis.js'
 
 class LineChart extends React.Component{
-	static propTypes = {
-
-	}
-
-	static defaultProps = {
-		color: '#2196F3',
-		svgHeight: 40,
-		svgWidth: 80
+	constructor(props) {
+    	super(props);
 	}
 
 	render () {
@@ -54,3 +48,9 @@ class LineChart extends React.Component{
 }
 
 export { LineChart }
+
+LineChart.defaultProps = {
+		color: '#2196F3',
+		svgHeight: 40,
+		svgWidth: 80
+	}

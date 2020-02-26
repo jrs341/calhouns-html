@@ -5,7 +5,8 @@ const e = React.createElement;
 import { LineChart } from "../LineChart/lineChart.js";
 
 //import TIVOLI_RIVER_INFO from '../../graphql/TivoliRiverInfo.graphql'
-import { Spinner } from "./spinner.js"; 
+import { Spinner } from "./spinner.js";
+
 class TivoliRiverLevel extends React.Component{
 	constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ class TivoliRiverLevel extends React.Component{
     this.getData = this.getData.bind(this)
   }
 
-	getData = () => {
+	getData() {
 		fetch('https://graphql-server-basic.herokuapp.com/?query={getTivoliRiverInfo{data{date, level}, trendInfo{lastReading{date, level} sixHourDelta, twelveHourDelta, twentyFourHourDelta, fortyEightHourDelta}}}')
 			.then((response) => {
 				if (response.status !== 200) {
@@ -37,7 +38,7 @@ class TivoliRiverLevel extends React.Component{
 
 	render() {
 
-		if (typeof this.state.data === 'object'){
+		if (typeof this.state.data == 'object'){
 			return e(LineChart, {data: this.state.data.data.getTivoliRiverInfo}, null)
 		}
 			this.getData()

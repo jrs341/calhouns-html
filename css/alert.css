@@ -1,0 +1,19 @@
+.alert {
+  width: 80vw;
+  margin: 2rem auto;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem;
+  display: none;
+}
+
+@-webkit-keyframes onAutoFillStart {from{}}
+@-webkit-keyframes onAutoFillCancel {from{}}
+input:-webkit-autofill {
+    animation-name: onAutoFillStart;
+    transition: background-color 50000s ease-in-out 0s;
+}
+input:not(:-webkit-autofill) {
+    animation-name: onAutoFillCancel;
+}

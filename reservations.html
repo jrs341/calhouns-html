@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+<<<<<<< HEAD
  	<meta charset="UTF-8">
+=======
+ <meta charset="UTF-8">
+>>>>>>> master
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<script type="application/ld+json">
 	{
+<<<<<<< HEAD
 	  "@context": "http://schema.org",
 	  "@type": [
 	  "RVPark",
@@ -44,11 +49,52 @@
 	    "latitude": "28.477294",
 	    "longitude": "-96.861032",
 	    "geoRadius": "45000"
+=======
+  "@context": "http://schema.org",
+  "@type": [
+  "RVPark",
+  "Campground",
+  "LodgingBusiness"
+  ],
+  "name": "Calhoun's Riverside RV Retreat",
+  "openingHours": [
+    "Mo-Fr 09:00-18:00",
+    "Sa-Su 09:00-16:00"
+    ],
+  "telephone": "(361) 550-7536",
+  "url": "https://www.calhounsriversidervretreat.com",
+  "image": "https://www.calhounsriversidervretreat.com/css/images/circleC.png",
+  "priceRange": "$$",
+  "hasMap": 		"https://www.google.com/maps/place/125+Haeber+Ln,+Tivoli,+TX+77990/@28.4767777,-96.8629815,17z/data=!3m1!4b1!4m5!3m4!1s0x8669d8eb4b1185b9:0xc2267a66b6d7b93c!8m2!3d28.4767777!4d-96.8607928",
+  "checkinTime": "14:00",
+  "checkoutTime": "12:00",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Tivoli",
+    "addressRegion": "TX",
+    "postalCode": "77990",
+    "streetAddress": "125 Haeber Ln"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "27"
+  },
+   "geo": {
+    "@type": [
+    "GeoCoordinates",
+    "GeoCircle"
+    ],
+    "latitude": "28.477294",
+    "longitude": "-96.861032",
+    "geoRadius": "45000"
+>>>>>>> master
 	  }
 	 }
 	</script>
 	<meta name="description" content="RV Park">
 	<meta name="author" content="Jason Sinn">
+<<<<<<< HEAD
 	<link rel="shortcut icon" href="./css/images/favicon.ico">
   	<title>Calhoun's RV Retreat</title> 
   	
@@ -60,11 +106,131 @@
     </div>
 		<form>
 			<fieldset name="personal">
+=======
+	<!--<link rel="shortcut icon" href="./css/images/favicon.ico">-->
+	<link rel="stylesheet" href="css/alert.css">
+ <title>Calhoun's RV Retreat</title> 
+<style type="text/css">
+
+	.progress-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+	}
+
+	form {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: column;
+	}
+
+	fieldset {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: column;
+	}
+
+	input{
+		max-width: 50%
+	}
+
+	input[type="reset"]{
+		justify-self: flex-start;
+	}
+
+	.buttonRow {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: row;
+		-webkit-justify-content: space-between;
+	}
+
+	.row {
+		display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+		-webkit-flex-direction: column;
+	}
+
+	@media screen and (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: row;
+  }
+
+  label{
+  	width:50%;
+  }
+}
+
+</style>
+
+</head>
+<body>
+	<header class="progress-container">
+		<progress value="0" max="100"></progress>
+	</header>
+	<div class="alert"></div>
+	<div id="form"></div>
+		<script>
+
+			let address = {
+				street:'',
+				street2:'',
+				city:'',
+				state:'',	
+				zipCode:''
+			}
+			/*document.querySelector('form.form').addEventListener('submit', function(e) {
+ 			e.preventDefault()
+ 				const formData = new FormData(this)
+ 				const entires = formData.entries()
+
+ 				for (var input of entires) {
+   			console.log(input[0] + ': ' + input[1])
+ 				}
+		})*/
+			const basicInfoHTML =
+				`<div class="row">
+				<label for="email">Email Address</label>
+				<input
+					id="email"
+					type="email"
+					name="email"
+					placeholder="you@gmail.com"
+					maxlength="50"
+					autofocus
+					onchange="validateEmail(this)"
+					required>
+			</div>
+			<br>
+			<div class="row">
+				<label for="phone_number">Phone Number</label>
+				<input 
+					id="phone_number"
+					type="tel"
+					name="phone_number"
+					placeholder="(123)456-7890"
+					
+					minlength="10" 
+					maxlength="14" 
+					onchange="validatePhone(this)"
+					required>
+			</div>
+ 		<br>
+ 		<div class="row">
+ 			<label for="first_name">First Name</label>
+>>>>>>> master
 				<input 
 					id="first_name"
 					type="text"
 					name="first_name"
 					placeholder="First Name"
+<<<<<<< HEAD
 					required
 					pattern="^[a-zA-Z]+$"
 					onblur="capitalize()">
@@ -76,11 +242,21 @@
 						}
 					</script>
 				<br>
+=======
+					pattern="^[a-zA-Z]+$"
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>
+			<div class="row">
+				<label for="last_name">Last Name</label>
+>>>>>>> master
 				<input 
 					id = "last_name"
 					type="text"
 					name="last_name"
 					placeholder="Last Name"
+<<<<<<< HEAD
 					required
 					pattern="^[a-zA-Z]+$"
 					onblur="capitalizeLast()">
@@ -98,10 +274,84 @@
 					placeholder="Email Address"
 					required>
 				<br>
+=======
+					pattern="^[a-zA-Z]+$"
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>`
+
+		const addressHTML = 
+		`<div class="row">
+				<label for="street">Street Address Line 1</label>
+				<input
+					id="street"
+					type="text"
+					name="street"
+					placeholder="Street Address Line 1"
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>
+			<div class="row">
+				<label for="street2">Street Address Line 2</label>
+				<input
+					id="street2"
+					type="text"
+					name="street2"
+					placeholder="Street Address Line 2"
+					onchange="capitalize(this)">
+			</div>
+				<br>
+				<div class="row">
+ 				<label for="city">City</label>
+ 				<input
+ 					id="city"
+ 					type="text" 
+ 					name="city"
+ 					placeholder="City"
+ 					onchange="capitalize(this)"
+ 					required>
+ 			</div>
+ 			<br>
+				<div class="row">
+ 				<label for="state">State</label>
+ 				<input 
+						id="state"
+						type="text"
+						name="state"
+						placeholder="ex. TX"
+						pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+						minlength="2" 
+						maxlength="2"
+						onchange="capitalize(this)"
+						required>
+				</div>
+				<br>
+				<div class="row">
+					<label for="zipCode">Zip Code</label>
+  			<input 
+  				id="zipCode"
+						type="text"
+						name="zipCode"
+						placeholder="567890"
+						pattern="^[0-9]+$"
+						minlength="5" 
+						maxlength="5"
+						onchange="validateAddress(this)" 
+						required>
+				</div>
+				<br>`
+
+			const driverInfoHTML = 
+			`<div class="row">
+				<label for="drivers_state"> Drivers License Issuing State</label>
+>>>>>>> master
 				<input 
 					id="drivers_state"
 					type="text"
 					name="drivers_state"
+<<<<<<< HEAD
 					placeholder="Issuing State"
 					required
 					pattern="^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$"
@@ -116,10 +366,23 @@
 						}
 					</script>
 				<br>
+=======
+					placeholder="ex. TX"
+					pattern="^(?:(A[KLRZ]*|C[AOT]*|D[CE]*|F[L]*|G[A]*|H[I]*|I[ADLN]*|K[SY]*|L[A]*|M[ADEINOST]*|N[CDEHJMVY]*|O[HKR]*|P[AR]*|R[I]*|S[CD]*|T[NX]*|U[T]*|V[AIT]*|W[AIVY]*))$"
+					minlength="2" 
+					maxlength="2" 
+					onchange="capitalize(this)"
+					required>
+			</div>
+			<br>
+			<div class="row">
+				<label for="drivers_number">Drivers License Number</label>
+>>>>>>> master
 				<input
 					id="drivers_number"
 					type="text"
 					name="drivers_number"
+<<<<<<< HEAD
 					placeholder="Drivers License Number"
 					required
 					pattern="^[0-9]*$"
@@ -168,8 +431,404 @@
 			<input type="submit">
 			<input type="reset">
 		</form>
+=======
+					placeholder="1234567"
+					pattern="^[0-9a-zA-Z]+$"
+					maxlength="15"
+					onchange="driverNumber(this)"
+					required>
+			</div>
+			<br>`
+
+			const formButtonsHTML =
+			`<div class="buttonRow">
+				<input type="reset">
+				<button id="save">Save</button>
+				<button id="next">Next</button>
+			</div>`
+			
+			const rentalDatesHTML = 
+			`<label for="checkinDate"> Checkin Date </label>
+				<input type="date" id="checkinDate" required>
+				<br>
+				<label for="checkoutDate"> Checkout Date </label>
+				<input type="date" id="checkoutDate" required>
+				<br>
+			`
+			const rentalRateHTML =
+			`<label for="daily"> Daily </label>
+				<input type="checkbox" class="checkbox" id="daily" value="daily" onclick="rentalRate('checkbox')" required>
+				<label for="weekly"> Weekly </label>
+				<input type="checkbox" class="checkbox" id="weekly" value="weekly" onclick="rentalRate('checkbox')" required>
+				<label for="monthly"> Monthly </label>
+				<input type="checkbox" class="checkbox" id="monthly" value="monthly" onclick="rentalRate('checkbox')" required>
+				<br>`
+
+				const submitButtonHTML = 
+				`<input type="submit">
+				`
+			const availibility = {cabins: 'none', rv: 'some'}
+			let formHTML = document.createElement('form')
+			formHTML.method = "post"
+			let fieldset = document.createElement('fieldset')
+			let page = 0
+
+			const basicInfo = (availability) => {
+			console.log('localStorage', localStorage)
+			if (localStorage.hasOwnProperty('checkin')){
+				page = JSON.parse(localStorage.checkin).page
+			}
+			if (availability.cabin == 'none' || availability.rv == 'none') {
+				formHTML.id = 'callList'
+				formHTML.innerHTML = `
+				<h1> Currently Calhoun's does not have any vacancies, please fill out the form below if you would like to be notified when an RV space or cabin becomes avaialble
+				</h1>
+				<fieldset>` + rentalRateHTML + rentalDatesHTML + basicInfoHTML + submitButtonHTML + `</fieldset>`
+			} else {
+				formHTML.id = 'checkin'
+				switch(page){
+					case 0 :
+					formHTML.innerHTML = `<fieldset>` + basicInfoHTML + formButtonsHTML + `</fieldset>`
+					break;
+					case 1 :
+					formHTML.innerHTML = `<fieldset>` + addressHTML + driverInfoHTML + formButtonsHTML + `</fieldset>`
+					break;
+					case 2 :
+					`<h1> Your Done <h1>` + formButtonsHTML
+					break;
+					default :
+					`<h1> Oops Somenthing Went Wrong </h1>`
+				}
+			}
+			document.getElementById('form').appendChild(formHTML)
+			}
+	
+	basicInfo(availibility)
+
+		const capitalize = (input) => {
+			switch(input.id){
+				case 'first_name':
+				checkName(input)
+				break;
+				case 'last_name':
+				checkName(input)
+				break;
+				case 'street':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				setProgress()
+				return input.value
+				break;
+				case 'street2':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				return input.value
+				break;
+				case 'city':
+				input.value = capitalizeFirst(input.value)
+				setAddress(input)
+				setProgress()
+				return input.value
+				break;
+				case 'state':
+				checkState(input)
+				break;
+				case 'drivers_state':
+				checkState(input)
+				break;
+				default:
+			}
+		}
+
+		const capitalizeFirst = (value) => {
+			let string = value.split(' ').map(w => w[0].toUpperCase()+ w.substr(1).toLowerCase()).join(' ')
+			return string
+		}
+
+		const checkForNumbers = (value) => {
+			let length = value.replace(/[^0-9]/g,"").length
+			return length
+		}
+
+		const checkForSpecialChar = (value) => {
+			specialRegex = /[^A-Z a-z]/ 
+		 	return specialRegex.test(value)
+		}
+
+		const checkName = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+				input.value = capitalizeFirst(input.value)
+				setProgress()
+				return input.value
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Only enter letters')
+				}
+			}
+		}
+
+		const checkState = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			if (!checkForSpecialChar(input.value) && checkForNumbers(input.value) === 0){
+				input.value = input.value.toUpperCase()
+				setAddress(input)
+				setProgress()
+				return input.value
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Only enter letters')
+				}
+			}
+		}
+
+		const driverNumber = (input) => {
+			let drivers_number = document.getElementById('drivers_number')
+			input.value = input.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
+		}	
+
+		const rentalRate = (elClass) => {
+			let el=document.getElementsByClassName(elClass)
+				let atLeastOneChecked=false
+	   for (i=0; i<el.length; i++) {
+     if (el[i].checked === true) {
+      atLeastOneChecked=true 
+     } else {
+     	el[i].disabled = true
+     }
+ 			}
+ 			if (atLeastOneChecked === true) {
+     for (i=0; i<el.length; i++) {
+      el[i].required = false
+     }
+ 			} else {
+     for (i=0; i<el.length; i++) {
+      el[i].disabled = false
+      el[i].required = true
+     }
+ 		}
+		}
+
+		const setAddress = (input) => {
+			address[input.id] = input.value
+		}
+
+		const setProgress = (value) => {
+			let progress = document.getElementsByTagName('progress')[0]
+			return progress.value = progress.value + 10
+		}
+
+		const validateAddress = (input) => {
+	
+			/*const urlAddress = 'https://us-street.api.smartystreets.com/street-address?street=123+main+Schenectady+NY&key=8126254261288690'
+			const Http = new XMLHttpRequest()
+			Http.open("GET", urlAddress)
+			Http.send()
+			Http.onreadystatechange = (e) => {
+				let response = JSON.parse(Http.responseText)
+				if (response.mx_found) {
+					displayAlert('Email is Valid')
+				} else {
+					displayAlert('Please enter a valid email')
+				}
+			}*/
+		}
+
+/* ====== mailboxlayer.com ===== */
+		const validateEmail = (input) => {
+			input.oninvalid = (event) => {
+			event.target.setCustomValidity('')
+			}
+			const Http = new XMLHttpRequest()
+			const url='https://apilayer.net/api/check?access_key=5dfcd20bef36ce857a1b68b92204a944&email='+input.value+'&smtp=1&format=1'
+			/*Http.open("GET", url)
+			Http.send()*/
+
+			Http.onreadystatechange = (e) => {
+				let response = JSON.parse(Http.responseText)
+				if (response.mx_found) {
+					setProgress()
+					return
+				} else {
+					input.oninvalid = (event) => {
+					event.target.setCustomValidity('Please enter a valid email address')
+					}
+				}
+			}
+		}
+
+		const validatePhone = (input) =>{
+	
+			if(checkForNumbers(input.value) === 10){
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('')
+				}
+				var numbers = input.value.replace(/\D/g, ''),
+				char = { 0: '(', 3: ') ', 6: '-' };
+				phoneNumberFormat = '';
+				for (var i = 0; i < numbers.length; i++) {
+				phoneNumberFormat += (char[i] || '') + numbers[i];
+				}
+				input.value = phoneNumberFormat
+				setProgress()
+				return input.value
+			} else if (input.value.length > 10 || input.value.length < 10) {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Phone number should be 10 digitis')
+			}
+			} else {
+				input.oninvalid = (event) => {
+				event.target.setCustomValidity('Format should be (123) 456-7890 or enter 10 consecutive numbers')
+				}
+			}	
+		}
+		</script>
+>>>>>>> master
 	<footer>
 		
 	</footer>
 </body>
+<<<<<<< HEAD
+=======
+<script src="https://d79i1fxsrar4t.cloudfront.net/sdk/1.4.2/smartystreets-sdk-1.4.2.min.js"></script>
+<script>
+
+/* ===== Listener for Auto Fill events =====*/
+/*const AUTOFILLED = 'is-autofilled'
+const onAutoFillStart = (el) => {el.classList.add(AUTOFILLED)}
+const onAutoFillCancel = (el) => el.classList.remove(AUTOFILLED)
+const onAnimationStart = ({target, animationName}) => {
+    switch (animationName) {
+        case 'onAutoFillStart':
+        	console.log('start')
+            return onAutoFillStart(target)
+        case 'onAutoFillCancel':
+        	console.log('cancel')
+            return onAutoFillCancel(target)
+    	}
+	}
+
+document.querySelector('input').addEventListener('webkitAnimationStart', onAnimationStart, false)*/
+
+
+	const formId = "checkin"; // ID of the form
+	const url = location.href; //  href for the page
+	//const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+	const formIdentifier = `${formId}`; // Identifier used to identify the form
+	const nextButton = document.querySelector("#next");
+	const saveButton = document.querySelector("#save"); // select save button
+	const alertBox = document.querySelector(".alert"); // select alert display div
+	let form = document.querySelector(`#${formId}`); // select form
+
+	let formElements = form.elements; // get the elements in the form
+	const getFormData = () => {
+		let data
+			console.log('localStorage[formIdentifier', localStorage[formIdentifier])
+			if (localStorage[formIdentifier] == undefined) {
+				data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
+				console.log('getFormData data if', data)
+			} else {
+				data = JSON.parse(localStorage[formIdentifier])
+				console.log('getFormData data else', data)
+			}
+  	
+  	let formElements = form.elements;
+
+  	for (const element of formElements) {
+    	if (element.name.length > 0) {
+    		element.oninvalid = (event) => {
+						event.target.setCustomValidity('')
+						}
+    		if (element.checkValidity()){
+    			console.log('checkValidity', data[formIdentifier])
+    			if (data[formIdentifier] == undefined) {
+    				data = { [formIdentifier]: JSON.parse(localStorage[formIdentifier])}
+    				console.log('data after parse', data)
+    				data[formIdentifier][element.name] = element.value
+    			} else {
+      	data[formIdentifier][element.name] = element.value;
+    			}
+    		} else {
+    			document.querySelector('#'+ element.id).setCustomValidity('Enter a valid ' + element.id)
+    			document.querySelector('#' + element.id).reportValidity()
+    		}
+    	}
+  	}
+  	return data;
+	};
+
+nextButton.onclick = event => {
+//const next = event => {
+event.preventDefault();
+  data = getFormData()
+
+  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+  
+  let localData = JSON.parse(localStorage.checkin)
+
+  if (form.checkValidity()) {
+  	console.log('hasOwnProperty', localData)
+	  if (localData.hasOwnProperty('page')){
+	  	console.log('has page', data[formIdentifier].page)
+	  	data[formIdentifier].page = data[formIdentifier].page + 1
+	  	localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+		 	basicInfo(availibility)
+		 	location.reload()
+	  } else {
+	  	console.log('else')
+	  	data[formIdentifier].page = 1
+	  
+	  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]))
+		 basicInfo(availibility)
+		 location.reload()
+		 }
+	 } else {
+
+	 }
+
+  const message = "Form draft has been saved!";
+  displayAlert(message)
+}
+
+saveButton.onclick = event => {
+  event.preventDefault();
+  data = getFormData();
+  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+  const message = "Form draft has been saved!";
+  displayAlert(message);
+};
+
+/**
+ * This function displays a message
+ * on the page for 1 second
+ *
+ * @param {String} message
+ */
+const displayAlert = message => {
+  alertBox.innerText = message; // add the message into the alert box
+  alertBox.style.display = "block"; // make the alert box visible
+  setTimeout(function() {
+    alertBox.style.display = "none"; // hide the alert box after 1 second
+  }, 1000);
+};
+const populateForm = () => {
+  if (localStorage.key(formIdentifier)) {
+    const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
+    let formElements = form.elements;
+    for (const element of formElements) {
+      if (element.name in savedData) {
+        element.value = savedData[element.name];
+      }
+    }
+    const message = "Form has been refilled with saved data!";
+    displayAlert(message);
+  }
+};
+document.onload = populateForm(); // populate the form when the document is loaded
+</script>
+>>>>>>> master
 </html>
