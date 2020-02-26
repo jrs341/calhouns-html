@@ -53,6 +53,11 @@
 	<!--<link rel="shortcut icon" href="./css/images/favicon.ico">-->
   	<title>Calhoun's RV Retreat</title> 
   	<style type="text/css">
+  		img {
+		  width: 100%;
+		  height: auto;
+		}
+
   		ul {
 		  list-style-type: none;
 		  margin: 0;
@@ -77,35 +82,70 @@
 		  text-decoration: none;
 		}
 
-		/* Change the link color to #111 (black) on hover */
 		li a:hover {
 		  background-color: #111;
+		}
+
+		#navbar {
+		  overflow: hidden;
+		  background-color: #333;
+		}
+
+		.content {
+		  padding: 16px;
+		}
+
+		.sticky {
+		  position: fixed;
+		  top: 0;
+		  width: 100%;
+		}
+
+		.sticky + .content {
+		  padding-top: 60px;
 		}
   	</style>
   	
 </head>
 <body>
+	<h1> Calhoun's Riverside RV Retreat </h1>
 	<header>
-		<nav>
+		<nav id="navbar">
 			<ul>
 				<li><a href="/index.html"> Home</a></li>
 				<li><a href="/river.html"> River Level</a></li>
 				<li><a href="/rates.html"> Rates</a></li>
 				<li><a href="/contact.html"> Contact</a><li>
 			</ul>
-		</nav>
-		
+		</nav>	
 	</header>
- 		<h1> Calhoun's Riverside RV Retreat </h1>
+
+	<div class="content">
+		<img src="./css/coverImage.jpg"/>
+ 		
  		<h2> We are currently updating out website </h2>
  		<h2> Phone Number 361 550 7536 </h2>
  		<h2> Email calhoun@calhounsrvretreats.com </h2>
  		<h2> Address 125 Haeber Ln, Tivoli, TX 77990 </h2>
     	<br/>
     	<!--<a href="/reservations.html"> Reservations Page </a>-->
-		
+	</div>	
 	<footer>
 		
 	</footer>
+	<script type="text/javascript">
+		window.onscroll = function() {myFunction()};
+
+		var navbar = document.getElementById("navbar");
+		var sticky = navbar.offsetTop;
+
+		function myFunction() {
+		  if (window.pageYOffset >= sticky) {
+		    navbar.classList.add("sticky")
+		  } else {
+		    navbar.classList.remove("sticky");
+		  }
+		}
+	</script>
 </body>
 </html>
